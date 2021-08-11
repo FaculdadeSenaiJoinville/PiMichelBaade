@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ProjetoIndividual">
+        <wb-resource deploy-path="/" source-path="/WebContent"/>
+        <property name="context-root" value="ProjetoIndividual"/>
+        <property name="java-output-path" value="/ProjetoIndividual/build/classes"/>
+    </wb-module>
+</project-modules>

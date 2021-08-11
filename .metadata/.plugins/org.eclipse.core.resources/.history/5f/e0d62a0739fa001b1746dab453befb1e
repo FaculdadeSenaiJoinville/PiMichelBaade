@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Site da Software dos Sonhos">
+	<meta name="keywords" content="Padaria, Software, Sonhos">
+	<meta name="author" content="Michel Baade">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Software dos Sonhos</title>
+	<link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>
+	<form name="frmlogin" method="post" action="#">
+		<div id="logo"><img src="imgs/logo.png" alt="Logo da Software dos Sonhos"></div>
+		<br>
+		<div id="camposlogin">
+		<label for="login">Login: </label>
+		<input type="text" name="txtlogin" id="login" maxlength="45"><br>
+		<label for="senha">Senha: </label>
+		<input type="password" name="txtsenha" id="senha"><br>
+		<a>Esqueci minha senha</a><br>
+		</div>
+		<button type="reset">Limpar</button><button type="reset">Entrar</button>
+	</form>
+</body>
+</html>

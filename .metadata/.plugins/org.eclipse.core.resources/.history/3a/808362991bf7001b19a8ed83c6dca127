@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Site da Software dos Sonhos">
+	<meta name="keywords" content="Padaria, Software, Sonhos">
+	<meta name="author" content="Michel Baade">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Software dos Sonhos</title>
+</head>
+<body>
+	<header>
+		<img src="imgs/logo.png" alt="Logo da Software dos Sonhos" >
+		<h1>Software dos Sonhos</h1>
+	</header>
+	<footer>Copyright &copy; Software dos Sonhos 2021</footer>
+</body>
+</html>
