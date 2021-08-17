@@ -10,8 +10,14 @@ body{
 }
 img{
 	border:4px solid #000;
-	height: 125px;
-	width: 125px;
+	max-width:125px;
+  	max-height:125px;
+}
+#logomenor{
+	height: auto; 
+    width: auto; 
+    max-width: 47px; 
+    max-height: 47px;
 }
 form{
 	border:4px solid #000;
@@ -26,18 +32,22 @@ form{
 }
 #camposlogin{
 	margin: 15px;
-}
-div{
 	text-align: center;
 }
 a{
 	text-decoration: underline;
 }
-button {
+button{
 	width: 25%;
 	font-size: 16px;
 	margin: 0 10%;
 	background-color: #FFF;
+}
+#usuario{
+	width: auto;
+	font-size: 16px;
+	margin: 0 10%;
+	background-color: #66ccff;
 }
 
 input{
@@ -46,9 +56,10 @@ input{
 
 nav{
 	clear: both;
-	width: 80%;
+	width: 100%;
 	margin: 0px auto;
 	height: 55px;
+	background-color: #66ccff;
 }
 nav a{
 	color: white;
@@ -57,8 +68,16 @@ nav a{
 }
 nav .opcao{
 	float: left;
-	width: 33%;
-	background-color: #FFF;
+	width: auto;
+	background-color: #66ccff;
+	padding: 10px 0;
+	margin: 0 1%;
+	font-size: 26px;
+}
+.usuario{
+	float: right;
+	width: auto;
+	background-color: #66ccff;
 	padding: 10px 0;
 	margin: 0 1%;
 	font-size: 26px;
@@ -66,5 +85,16 @@ nav .opcao{
 nav .opcao:hover{
 	background-color: #83afd3;
 }
+nav #logomenor{
+	float: left;
+	height: 55px;
+	width: 55px;
+}
+.cent{
+	
+}
 
-
+section{
+	text-align: center;
+	margin-top: 350px;
+}

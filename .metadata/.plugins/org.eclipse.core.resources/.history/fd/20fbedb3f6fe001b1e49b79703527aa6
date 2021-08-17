@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<meta name="description" content="Site da Software dos Sonhos">
+	<meta name="keywords" content="Padaria, Software, Sonhos">
+	<meta name="author" content="Michel Baade">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software dos Sonhos</title>
+<link rel="stylesheet" type="text/css" href="../../css/site.css">
+</head>
+<body>
+<nav>
+<div ><img src="../../imgs/logomenor.png" alt="Logo da Software dos Sonhos" id="logomenor"></div>
+<a href="#"><div class="opcao">Início</div></a>
+<a href="#"><div class="opcao">Categorias</div></a>
+<a href="#"><div class="opcao">Produtos</div></a>
+<a href="#"><div class="usuario">Estoquista</div></a>
+<button class="usuario">Sair</button>
+</nav>
+
+<section>
+<div class="cent">
+<img src="../../imgs/vendas.png" alt="Logo da Software dos Sonhos">
+<img src="../../imgs/produtos.png" alt="Logo da Software dos Sonhos">
+<img src="../../imgs/categorias.png" alt="Logo da Software dos Sonhos">
+</div>
+
+<div>
+<img src="../../imgs/usuarios.png" alt="Logo da Software dos Sonhos">
+<img src="../../imgs/funcionarios.png" alt="Logo da Software dos Sonhos">
+</div>
+
+</section>
+
+
+</body>
+</html>

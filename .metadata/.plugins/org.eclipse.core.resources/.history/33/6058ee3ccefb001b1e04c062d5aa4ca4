@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Site da Software dos Sonhos">
+	<meta name="keywords" content="Padaria, Software, Sonhos">
+	<meta name="author" content="Michel Baade">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+	<title>Software dos Sonhos</title>
+	<link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>
+	<form name="frmlogin" method="post" action="#">
+		<div id="logo"><img src="imgs/logo.png" alt="Logo da Software dos Sonhos" >
+		
+		<label for="login">Login: </label>
+		<input type="text" name="txtlogin" id="login">
+		<label for="senha">Senha: </label>
+		<input type="password" name="txtsenha" id="senha">
+		<a>Esqueci minha senha</a>
+		<button type="reset">Limpar</button>
+		<button type="reset">Entrar</button>
+	</form>
+	<footer>Copyright &copy; Software dos Sonhos 2021</footer>
+</body>
+</html>
