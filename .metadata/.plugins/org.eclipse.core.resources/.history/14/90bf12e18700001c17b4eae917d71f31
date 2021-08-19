@@ -1,0 +1,8 @@
+<div ><img src="../../imgs/logomenor.png" alt="Logo da Software dos Sonhos" id="logomenor"></div>
+<nav>
+<a href="#"><div class="opcao">Início</div></a>
+<a href="#"><div class="opcao">Categorias</div></a>
+<a href="#"><div class="opcao">Produtos</div></a>
+<a href="#"><div class="usuario">Sair</div></a>
+<a href="#"><div class="usuario">Estoquista</div></a>
+</nav>

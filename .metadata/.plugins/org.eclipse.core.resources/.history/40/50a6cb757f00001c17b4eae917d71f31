@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+body{
+	margin: 0 auto;
+	font-family: "Century Gothic", sans-serif;
+}
+
+header{
+	height: 55px;
+	background-color: #66ccff;
+	position: sticky;
+	position: -webkit -sticky;
+	top: 0px;
+}
+
+header img{
+	float: left;
+	height: 55px;
+	width: 55px;
+}
+
+nav{
+	clear: both;
+	width: 80%;
+	height: 100%;
+	display: inline-block;
+
+}
+
+nav a{
+	color: white;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-align: center;
+	margin: 5px;
+}
+
+nav .opcao{
+	float: left;
+	width: 10%;
+	background-color: #66ccff;
+	margin: 0 0.5%;
+	font-size: 16px;
+	height: 100%;
+}
+
+nav .opcao:hover{
+	background-color: #008eb6;
+}
+
+.dropdown{
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content{
+	display: none;
+	position: absolute;
+	background-color: #66ccff;
+	z-index: 1;
+	width: 100%;
+}
+
+.dropdown-content a{
+	display: block;
+}
+
+
+.dropdown-content a:hover{
+	background-color: 83afd3;
+}
+
+.dropdown:hover .dropdown-content{
+	display: block;
+}
+
+.bloco{
+	text-align: center;
+	margin: 0px auto;
+}
+tr #baixo{
+	padding-left: 15px;
+}
+
+section{
+	clear: both;
+	min-height: 460px;
+	width: 100%;
+	margin-top: 250px;
+	text-align: center;
+	
+}
+
+section img{
+	border:4px solid #000;
+}
+
+.frmInserir, .frmFiltrar{
+	margin: 0px auto;
+	margin-bottom: 10px;
+}
+
+
+.frmInserir{
+	width: 600px;
+}
+
+.frmFiltrar{
+	width: 350px;
+}
+
+.frmInserir label{
+	width: 200px;
+}
+
+.frmInserir input{
+	width: 300px;
+	padding: 2px 0;
+}
+
+.frmInserir button, .frmFiltrar{
+	width: 100px;
+	margin: 0 1%;
+	background-color: #66ccff;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.frmInserir .aviso{
+	background-color: #ff0000;
+	color: #fff;
+	font-weight: bold;
+}
+
+.listaRegistros{
+	margin-bottom: 10px;
+}
+
+.listaRegistros table{
+	border: 1px solid #000;
+	border-collapse: collapse;
+	margin: 0 auto;
+	min-width: 50%;
+}
+
+.listaRegistros table th{
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	padding: 0 5px;
+	border: transparent;
+}
+
+.listaRegistros tr, .listaRegistros td, .listaRegistros th{
+	border: 1px solid #B0C4DE;
+	padding: 0px 5px;
+}
+
+.listaRegistros tr, .listaRegistros td{
+	font-size: 16px;
+}
+
+.listaRegistros tr:nth-child(even){
+	background-color: #b1ccf5;
+}
+
+.listaRegistros tr:nth-child(odd){
+	background-color: #83afd3;
+}
+
+.listaRegistros .acoes{
+	width: 70px;
+}
+
+.listaRegistros table img{
+	padding: 0 5px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer; 
+}
+

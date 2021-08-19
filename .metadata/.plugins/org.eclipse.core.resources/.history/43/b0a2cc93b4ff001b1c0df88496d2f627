@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+body{
+	margin: 0 auto;
+	font-family: "Century Gothic", sans-serif;
+}
+
+header{
+	height: 100px;
+	background-color: #008eb6;
+	position: sticky;
+	position: -webkit -sticky;
+	top: 0px;
+}
+
+header img{
+	float: left;
+	height: 55px;
+	width: 55px;
+	margin: 10px;
+}
+
+nav{
+	clear: both;
+	width: 80%;
+	display: inline-block;
+	margin: 0px auto;
+}
+
+nav a{
+	color: white;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-decoration: none;
+	text-align: center;
+}
+
+nav .opcao{
+	float: left;
+	width: 10%;
+	background-color: #005f89;
+	margin: 0 0.5%;
+	font-size: 16px;
+}
+
+nav .opcao:hover{
+	background-color: #83afd3;
+}
+
+.dropdown{
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content{
+	display: none;
+	position: absolute;
+	background-color: #005f89;
+	z-index: 1;
+	width: 100%;
+}
+

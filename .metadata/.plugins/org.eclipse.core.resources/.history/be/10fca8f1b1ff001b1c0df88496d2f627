@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body{
+	margin: 0 auto;
+	font-family: "Century Gothic", sans-serif;
+}
+
+header{
+	height: 120px;
+	background-color: #008eb6;
+	position: sticky;
+	position: -webkit -sticky;
+	top: 0px;
+}
+
+header img{
+	float: left;
+	height: 100px;
+	width: 100px;
+	margin: 10px;
+}

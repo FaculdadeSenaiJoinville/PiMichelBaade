@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<meta name="description" content="Site da Software dos Sonhos">
+	<meta name="keywords" content="Padaria, Software, Sonhos">
+	<meta name="author" content="Michel Baade">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software dos Sonhos</title>
+<link rel="stylesheet" type="text/css" href="../../css/site.css">
+</head>
+<body>
+
+
+
+
+<header>
+</header>
+
+<section>	
+			<table class="bloco">
+				<tr>
+					<td><img src="../../imgs/vendas.png" alt="Logo da Software dos Sonhos"><br>
+					<a>Vendas</a>
+					</td>
+				
+
+					<td><img src="../../imgs/produtos.png" alt="Logo da Software dos Sonhos"><br>
+						<a>Produtos</a></td>
+	
+
+				<td><img src="../../imgs/categorias.png" alt="Logo da Software dos Sonhos"><br>
+				<a>Categorias</a></td>
+				
+				</tr>
+				<tr>
+					<td class="baixo"><img src="../../imgs/usuarios.png"
+						alt="Logo da Software dos Sonhos"><br>
+						<a>Usuários</a>
+						</td>
+					<td class="baixo"><img
+						src="../../imgs/funcionarios.png"
+						alt="Logo da Software dos Sonhos"><br>
+						<a>Funcionários</a>
+						</td>
+				</tr>
+			</table>
+</section>
+
+
+
+
+<nav>
+<div ><img src="../../imgs/logomenor.png" alt="Logo da Software dos Sonhos" id="logomenor"></div>
+<a href="#"><div class="opcao">Início</div></a>
+<a href="#"><div class="opcao">Vendas</div></a>
+<a href="#"><div class="usuario">Sair</div></a>
+<a href="#"><div class="usuario">Caixa</div></a>
+
+</nav>
+
+<section>
+<div class="cent">
+<img src="../../imgs/vendas.png" alt="Logo da Software dos Sonhos">
+<img src="../../imgs/usuarios.png" alt="Logo da Software dos Sonhos">
+</div>
+
+</section>
+
+
+</body>
+</html>
