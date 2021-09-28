@@ -30,10 +30,11 @@ form{
 #logo{
 	text-align: center;
 }
-#camposlogin{
+#camposlogin {
 	margin: 15px;
 	text-align: center;
 }
+
 a{
 	text-decoration: underline;
 }

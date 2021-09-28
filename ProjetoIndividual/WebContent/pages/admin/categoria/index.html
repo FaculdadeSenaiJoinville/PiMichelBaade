@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Site da Software dos Sonhos">
+<meta name="keywords" content="Padaria, Software, Sonhos">
+<meta name="author" content="Michel Baade">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software dos Sonhos</title>
+<link rel="stylesheet" type="text/css" href="/ProjetoIndividual/css/admin.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script src="/ProjetoIndividual/js/admin.js"></script>
+<script src="/ProjetoIndividual/js/categoria.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+ 
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+</head>
+<body>
+	<section class="secInserir">
+
+		<h2>Registro de Categoria</h2>
+
+		<form name="frmAddCategoria" id="addCategoria" class="frmInserir">
+			<fieldset>
+				<legend>Nova Categoria</legend>
+				<table>
+
+					<tr>
+
+						<th>Nome da Categoria</th>
+						<td><input type="text" name="nome"></td>
+
+					</tr>
+					<tr id="botoesInserir">
+						<td colspan="2">
+							<button type="reset">Limpar</button>
+							<button type="button" onclick="SONHOS.categoria.cadastrar()">Cadastrar</button>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+
+		<h3>Categorias Registradas</h3>
+
+		<form id="filtraCategoria" class="frmFiltrar">
+
+			<fieldset>
+				<legend>Filtrar</legend>
+
+				<input type="text" name="txtbusca" id="campoBuscaCategoria"
+					placeholder="Nome da categoria">
+				<button type="button" onclick="SONHOS.categoria.buscar()">Buscar</button>
+
+			</fieldset>
+
+		</form>
+
+		<div id="listaCategorias" class="listaRegistros"></div>
+
+
+		<div id="modalEditaCategoria" class="modalEditar">
+			<form name="frmEditaCategoria" id="editaCategoria" class="frmEditar">
+				<table>
+					<tr>
+						<th>Nome da Categoria</th>
+						<td><input type="text" name="nome"></td>
+					</tr>
+				</table>
+				<input type="hidden" name="idCategoria">
+			</form>
+		</div>
+		
+		<div id="modalExcluiCategoria" class="modalEditar">
+			<form name="frmExcluiCategoria" id="editaCategoria" class="frmEditar">
+				<input type="hidden" name="idCategoria">
+				<table>
+					<tr>
+						<th>Tem certeza que deseja excluir essa categoria?</th>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+		
+	</section>
+	<div id="modalAviso"></div>
+</body>
+</html>

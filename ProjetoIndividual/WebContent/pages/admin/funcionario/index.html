@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Site da Software dos Sonhos">
+<meta name="keywords" content="Padaria, Software, Sonhos">
+<meta name="author" content="Michel Baade">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software dos Sonhos</title>
+<link rel="stylesheet" type="text/css" href="/ProjetoIndividual/css/admin.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script src="/ProjetoIndividual/js/admin.js"></script>
+<script src="/ProjetoIndividual/js/funcionario.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+ 
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+</head>
+<body>
+	
+	
+	<section class="secInserir">
+
+		<h2>Registro de Funcionários</h2>
+
+		<form name="frmAddFuncionario" id="addFuncionario" class="frmInserir">
+			<fieldset>
+				<legend>Novo Funcionario</legend>
+				<table>
+
+					<tr>
+
+						<th>Nome Completo</th>
+						<td><input type="text" name="nome" id="nome"></td>
+
+						<th>CPF</th>
+						<td><input type="text" name="cpf" id="cpf"></td>
+
+						<th>Data de Nascimento</th>
+						<td><input type="date" name="datanasc" id="datanasc"></td>
+
+					</tr>
+					
+					<tr>
+
+						<th>Telefone</th>
+						<td><input type="text" name="telefone" id="telefone"></td>
+
+						<th>E-mail</th>
+						<td><input type="email" name="email" id="email"></td>
+
+					</tr>
+					
+					<tr>
+
+						<th>Login</th>
+						<td><input type="text" name="login" id="login"></td>
+
+						<th>Senha</th>
+						<td><input type="password" name="senha" id="senha"></td>
+
+						<th>Nível de usuário</th>
+						<td> <select name="nivel">					
+						<option value="">Escolha</option>
+						<option value="AD">Administrador</option>
+						<option value="ES">Estoquista</option>
+						<option value="CA">Caixa</option>					
+						</select>
+						</td>
+
+					</tr>										
+					
+					<tr id="botoesInserir">
+						<td colspan="2">
+							<button type="reset">Limpar</button> <button type="button" onclick="validaFuncionario()">Cadastrar</button>						
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+
+		<h3>Funcionários Registrados</h3>
+
+		<form id="filtraFuncionario" class="frmFiltrar">
+
+			<fieldset>
+				<legend>Filtrar</legend>
+
+				<input type="text" name="txtbusca" id="campoBuscaFuncionario"
+					placeholder="Nome do Funcionário">
+				<button type="button" onclick="SONHOS.funcionario.buscar()">Buscar</button>
+
+			</fieldset>
+
+		</form>
+
+		<div id="listaFuncionarios" class="listaRegistros"></div>
+
+
+		<div id="modalEditaFuncionario" class="modalEditar">
+			<form name="frmEditaFuncionario" id="editaFuncionario" class="frmEditar">
+				<table>
+					<tr>
+						<th>Nome do Funcionário</th>
+						<td><input type="text" name="nome"></td>
+					</tr>
+				</table>
+				<input type="hidden" name="idFuncionario">
+			</form>
+		</div>
+		
+		<div id="modalExcluiFuncionario" class="modalEditar">
+			<form name="frmExcluiFuncionario" id="editaFuncionario" class="frmEditar">
+				<input type="hidden" name="idFuncionario">
+				<table>
+					<tr>
+						<th>Tem certeza que deseja excluir esse funcionário?</th>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+		
+	</section>
+	
+	
+	
+</body>
+</html>
