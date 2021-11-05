@@ -49,12 +49,16 @@ function validaUsuario(){
 $(document).ready(function() {
 
 	SONHOS.usuario = function(){};
+
 	
 	SONHOS.usuario.cadastrar = function(){
 		
 		var usuario = new Object();
 		usuario.login = document.frmAddUsuario.login.value;
-		usuario.senha = document.frmAddUsuario.senha.value;
+		usuario.senha = btoa(document.frmAddUsuario.senha.value);
+	
+		document.frmAddUsuario.senha.value = usuario.senha;
+		
 		usuario.nivel_usuario = document.frmAddUsuario.nivel_usuario.value;
 		usuario.data_nasc = document.frmAddUsuario.datanasc.value;
 		usuario.cpf = document.frmAddUsuario.cpf.value;
@@ -93,7 +97,7 @@ $(document).ready(function() {
 				success: function(dados){
 					
 					dados = JSON.parse(dados);					
-					$("#listaUsuarios").html(SONHOS.usuario.exibir(dados));				
+					$("#listaUsuarios").html(SONHOS.usuario.exibir(dados));	
 				},
 				error: function (info){
 					SONHOS.exibirAviso("Erro ao consultar os funcionários: "+ info.status +" - "+ info.statusText);
@@ -106,7 +110,7 @@ $(document).ready(function() {
 		
 		var tabela = "<table>"+
 		"<tr>"+
-		"<th>Nível de usuário</th>"+
+		"<th>Nível de funcionário</th>"+
 		"<th>Nome</th>"+
 		"<th>Login</th>"+
 		"<th>E-mail</th>"+		
@@ -167,8 +171,13 @@ $(document).ready(function() {
 			url: SONHOS.PATH + "usuario/buscarPorLogin",
 			data: "login="+login,
 			success: function(usuario){
-				
+				var teste = usuario.login;
 				document.frmExcluiUsuario.login.value = usuario.login;
+				
+				
+				if(usuario.login == undefined){
+					SONHOS.exibirAviso("O funcionário não foi encontrado no banco de dados. Por favor recarregue a página e tente novamente!");
+				}else{
 				
 				
 				var modalExcluiUsuario = {
@@ -181,7 +190,7 @@ $(document).ready(function() {
 							SONHOS.usuario.excluir(login);
 						},
 						"Cancelar": function(){
-							$(this).dialog(close);
+							$(this).dialog("close");
 						}
 					},
 					close: function(){
@@ -189,10 +198,12 @@ $(document).ready(function() {
 				};
 				
 				$("#modalExcluiUsuario").dialog(modalExcluiUsuario);
-				
+					
+				}
+					
 			},
 			error: function(info){
-				SONHOS.exibirAviso("Erro ao buscar a funcionário para exclusão: "+ info.status +" - "+ info.statusText);
+				SONHOS.exibirAviso("Erro ao buscar o funcionário para exclusão: "+ info.status +" - "+ info.statusText);
 			}
 		});		
 	};
@@ -207,6 +218,9 @@ $(document).ready(function() {
 			success: function(usuario){
 				
 				document.frmEditaUsuario.login.value = usuario.login;
+				
+				//usuario.senha = btoa(document.frmEditaUsuario.senha.value);
+	
 				document.frmEditaUsuario.senha.value = usuario.senha;
 				document.frmEditaUsuario.nivel_usuario.value = usuario.nivel_usuario;
 				document.frmEditaUsuario.datanasc.value = usuario.data_nasc;
@@ -215,17 +229,23 @@ $(document).ready(function() {
 				document.frmEditaUsuario.email.value = usuario.email;
 				document.frmEditaUsuario.telefone.value = usuario.telefone;		
 				
+				
+				if(usuario.cpf == "0"){
+				SONHOS.exibirAviso("O funcionário não foi encontrado no banco de dados. Por favor recarregue a página e tente novamente!");
+				}else{
+				
 				var modalEditaUsuario = {
 					title: "Editar funcionário",
 					height: 400,
-					width: 1150,
+					width: 1200,
 					modal: true,
 					buttons:{
-						"Salvar": function(){
-							SONHOS.usuario.editar();
+						"Salvar": function(){					
+						SONHOS.usuario.editar();
+											
 						},
 						"Cancelar": function(){
-							$(this).dialog(close);
+							$(this).dialog("close");
 						}
 					},
 					close: function(){
@@ -233,7 +253,10 @@ $(document).ready(function() {
 				};
 				
 				$("#modalEditaUsuario").dialog(modalEditaUsuario);
+	
 				
+				}
+		
 			},
 			error: function(info){
 				SONHOS.exibirAviso("Erro ao buscar o funcionário para edição: "+ info.status +" - "+ info.statusText);
@@ -246,14 +269,20 @@ $(document).ready(function() {
 		
 		var usuario = new Object();
 		usuario.login = document.frmEditaUsuario.login.value;
-		usuario.senha = document.frmEditaUsuario.senha.value;
+		//usuario.senha = document.frmEditaUsuario.senha.value;
+		
+		
+		usuario.senha = btoa(document.frmEditaUsuario.senha.value);
+	
+		
+		
 		usuario.nivel_usuario = document.frmEditaUsuario.nivel_usuario.value;
 		usuario.data_nasc = document.frmEditaUsuario.datanasc.value;
 		usuario.cpf = document.frmEditaUsuario.cpf.value;
 		usuario.nome = document.frmEditaUsuario.nome.value;
 		usuario.email = document.frmEditaUsuario.email.value;
 		usuario.telefone = document.frmEditaUsuario.telefone.value;
-			
+		
 		$.ajax({
 			type:"PUT",
 			url: SONHOS.PATH + "usuario/alterar",

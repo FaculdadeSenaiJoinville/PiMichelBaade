@@ -6,23 +6,24 @@
 <meta name="keywords" content="Padaria, Software, Sonhos">
 <meta name="author" content="Michel Baade">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/ProjetoIndividual/js/envia.js"></script>
 <title>Software dos Sonhos</title>
 <link rel="stylesheet" type="text/css" href="css/site.css">
 </head>
 <body>
-	<form name="frmlogin" method="post" action="#">
+	<form name="frmLogin" action="autenticar" method="POST" onsubmit="return ValidaDados()">
 		<div id="logo">
 			<img src="imgs/logo.png" alt="Logo da Software dos Sonhos">
 		</div>
 		<br>
 		<div id="camposlogin">
-			<label for="login">Login: </label> <input type="text" name="txtlogin"
+			<label for="login">Login: </label> <input type="text" name="login" 
 				id="login"><br> <label for="senha">Senha: </label> <input
-				type="password" name="txtsenha" id="senha"><br> <a
+				type="password" name="senha" id="senha"><br> <a
 				href="#">Esqueci minha senha</a><br>
 		</div>
 		<button type="reset" class="login">Limpar</button>
-		<button type="reset" class="login">Entrar</button>
+		<button type="submit" class="login">Entrar</button>
 	</form>
 </body>
 </html>

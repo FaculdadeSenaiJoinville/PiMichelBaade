@@ -128,11 +128,11 @@ h2{
 
 
 .frmInserir{
-	width: 600px;
+	width: 1000px;
 }
 
 .frmInserir table{
-	width: 600px;
+	width: 1000px;
 }
 .frmInserir td{
 	margin: 50px;
@@ -232,13 +232,28 @@ td a{
 	height: 50px;
 	width: auto;
 }
-.frmInserir tr #botoesInserir{	
-	width: 600px;
+.frmInserir tr #addUsuario{	
+	width: 1000px;
 }
 
 #addUsuario{
-	width: 1100px;
+	width: 1000px;
 }
+.frmInserir table #addCategoria{
+	width: 500px;
+}
+
+.frmInserir #addCategoria{	
+	width: 500px;
+}
+#addCategoria{
+	width: 500px;
+}
+#tableCategoria{
+	width: 500px;
+}
+
+
 #addUsuario th{
 	width: auto;
 }

@@ -2,6 +2,8 @@ SONHOS = new Object();
 
 $(document).ready(function() {
 	
+	
+	
 	SONHOS.PATH = "/ProjetoIndividual/rest/";
 	
 	$("header").load("/ProjetoIndividual/pages/admin/general/header.html");

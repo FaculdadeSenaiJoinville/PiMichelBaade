@@ -127,7 +127,7 @@ $(document).ready(function() {
 							SONHOS.categoria.excluir(id);
 						},
 						"Cancelar": function(){
-							$(this).dialog(close);
+							$(this).dialog("close");
 						}
 					},
 					close: function(){
@@ -166,7 +166,7 @@ $(document).ready(function() {
 							SONHOS.categoria.editar();
 						},
 						"Cancelar": function(){
-							$(this).dialog(close);
+							$(this).dialog("close");
 						}
 					},
 					close: function(){

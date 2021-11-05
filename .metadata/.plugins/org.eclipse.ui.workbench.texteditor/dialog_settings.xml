@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="modal"/>
+		<item key="selection" value="#addCategoria"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="#addCategoria"/>
+			<item value="frminserir"/>
+			<item value="usuario"/>
+			<item value="buscarPorLogin"/>
+			<item value="buscarUsuario"/>
+			<item value="exibirAviso"/>
 			<item value="modal"/>
 			<item value="id"/>
 			<item value="funcionario"/>
@@ -17,12 +23,6 @@
 			<item value="add"/>
 			<item value="input"/>
 			<item value="td"/>
-			<item value="table"/>
-			<item value="botoes"/>
-			<item value="cate"/>
-			<item value="frm"/>
-			<item value="frmadd"/>
-			<item value="ResultSet rs"/>
 		</list>
 		<list key="replacehistory">
 			<item value="usuario"/>

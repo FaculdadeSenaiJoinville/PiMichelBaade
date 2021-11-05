@@ -6,13 +6,10 @@ import com.google.gson.JsonObject;
 
 import br.com.projetoindividual.modelo.Usuario;
 
-public interface UsuarioDAO {
-
-	
-	public boolean inserir(Usuario usuario);
+public interface UsuarioDAO {	
+	public String inserir(Usuario usuario);
 	public List<JsonObject> buscarPorNome(String nome);
-	public boolean deletar(String login);
+	public String deletar(String login);
 	public Usuario buscarPorLogin(String login);
-	public boolean alterar(Usuario usuario);
-	
+	public String alterar(Usuario usuario);	
 }

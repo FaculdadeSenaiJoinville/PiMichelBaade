@@ -26,8 +26,6 @@ import br.com.projetoindividual.modelo.Usuario;
 @Path("usuario")
 public class UsuarioRest extends UtilRest {
 
-	
-	
 	@POST
 	@Path("/inserir")
 	@Consumes("application/*")
@@ -35,30 +33,16 @@ public class UsuarioRest extends UtilRest {
 
 		try {
 			Usuario usuario = new Gson().fromJson(usuarioParam, Usuario.class);
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
-
-			boolean retorno = jdbcUsuario.inserir(usuario);
-
-			String msg = "";
-
-			if (retorno) {
-				msg = "Usuário cadastrado com sucesso!";
-			} else {
-				msg = "Erro ao cadastrar funcionário.";
-			}
+			String retorno = jdbcUsuario.inserir(usuario);
 			conec.fecharConexao();
-
-			return this.buildResponse(msg);
+			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
-
 		}
-
 	}
 
 	@GET
@@ -68,9 +52,7 @@ public class UsuarioRest extends UtilRest {
 	public Response buscarPorNome(@QueryParam("valorBusca") String nome) {
 
 		try {
-
 			List<JsonObject> listaUsuarios = new ArrayList<JsonObject>();
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
@@ -94,26 +76,21 @@ public class UsuarioRest extends UtilRest {
 	public Response excluir(@PathParam("login") String login) {
 
 		try {
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
-
-			boolean retorno = jdbcUsuario.deletar(login);
-
-			String msg = "";
-
-			if (retorno) {
-				msg = "Usuário excluido com sucesso!";
-			} else {
-				msg = "Erro ao excluir usuário.";
+			String retorno="";
+			if(jdbcUsuario.validaExistencia(login)) {
+			 retorno = jdbcUsuario.deletar(login);
+			}else {
+				new Exception("Ocorreu algum erro ao excluir o funcionário, Por favor recarregue a página");
 			}
+			
 			conec.fecharConexao();
-			return this.buildResponse(msg);
+			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
-
 		}
 
 	}
@@ -149,18 +126,9 @@ public class UsuarioRest extends UtilRest {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
-
-			boolean retorno = jdbcUsuario.alterar(usuario);
-
-			String msg = "";
-
-			if (retorno) {
-				msg = "Usuário alterado com sucesso!";
-			} else {
-				msg = "Erro ao alterar usuário.";
-			}
+			String retorno = jdbcUsuario.alterar(usuario);
 			conec.fecharConexao();
-			return this.buildResponse(msg);
+			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

@@ -1,12 +1,15 @@
 package br.com.projetoindividual.jdbc;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.google.gson.JsonObject;
@@ -23,23 +26,44 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 		this.conexao = conexao;
 	}
 
-	public boolean inserir(Usuario usuario) {
+	public String inserir(Usuario usuario) {
 
-		String comando = "SELECT login FROM usuarios WHERE (cpf =" + usuario.getCpf() + " || email ='" + usuario.getEmail() +"') && login != '"
-				+ usuario.getLogin() + "' ";
+		String comando = "SELECT login FROM usuarios WHERE cpf =" + usuario.getCpf() + " || email ='" + usuario.getEmail() +"' || login = '" +usuario.getLogin()+ "' ";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			ResultSet rs = p.executeQuery(comando);
 
 			while (rs.next()) {
-				return false;
+				return "Já existe um usuário com o mesmo Login,CPF ou E-mail.";
 			}
 		
-			
-			
 			String comando2 = "INSERT INTO usuarios (login,senha,nivel_usuario,data_nasc,cpf,nome,email,telefone) VALUES (?,?,?,?,?,?,?,?)";
 
+			
+			
+			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
+			System.out.println("Texto deserializado: "+textodeserializado);
+			
+			String senmd5 = "";
+			
+			MessageDigest md = null;
+			
+			try {
+				md = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+			
+			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
+			
+			senmd5 = hash.toString(16);
+			System.out.println(senmd5);
+			usuario.setSenha(senmd5);
+			
+			
+			
+			
 			PreparedStatement p2 = this.conexao.prepareStatement(comando2);
 			p2.setString(1, usuario.getLogin());
 			p2.setString(2, usuario.getSenha());
@@ -51,11 +75,11 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			p2.setLong(8, usuario.getTelefone());
 
 			p2.execute();
-			return true;
+			return "Usuário cadastrado com sucesso!";
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
+			e.printStackTrace();		
+			return e.getMessage();
 		}
 	}
 
@@ -69,7 +93,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
 		List<JsonObject> listaUsuarios = new ArrayList<JsonObject>();
 		JsonObject usuario;
-
 		try {
 
 			Statement stmt = conexao.createStatement();
@@ -101,12 +124,10 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return listaUsuarios;
-
 	}
 
-	public boolean deletar(String login) {
+	public String deletar(String login) {
 		String comando = "DELETE FROM usuarios WHERE login = ?";
 		PreparedStatement p;
 		try {
@@ -114,12 +135,11 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 
 			p.setString(1, login);
 			p.execute();
-
+			return "Usuário deletado com sucesso!";
 		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+			e.printStackTrace();		
+			return e.getMessage();
+		}		
 	}
 
 
@@ -162,25 +182,44 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 		return usuario;
 	}
 
-	public boolean alterar(Usuario usuario) {
-
+	public String alterar(Usuario usuario) {
+		
 		String comando = "SELECT login FROM usuarios WHERE (cpf =" + usuario.getCpf() + " || email ='" + usuario.getEmail() +"') && login != '"
 				+ usuario.getLogin() + "' ";
-		
-		
-		
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			ResultSet rs = p.executeQuery(comando);
 
 			while (rs.next()) {
-				return false;
+				return "Já existe um usuário com o mesmo Login,CPF ou E-mail.";
 			}
-
+			
 			String comando2 = "UPDATE usuarios SET login=?,senha=?,nivel_usuario=?,data_nasc=?,cpf=?,nome=?,email=?,telefone=? WHERE login = ?";
 			PreparedStatement p2 = this.conexao.prepareStatement(comando2);
 
+			
+			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
+			System.out.println("Texto deserializado: "+textodeserializado);
+			
+			String senmd5 = "";
+			
+			MessageDigest md = null;
+			
+			try {
+				md = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+			
+			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
+			
+			senmd5 = hash.toString(16);
+			System.out.println(senmd5);
+			usuario.setSenha(senmd5);
+			
+			
+			
 			p2.setString(1, usuario.getLogin());
 			p2.setString(2, usuario.getSenha());
 			p2.setInt(3, usuario.getNivel_usuario());
@@ -192,14 +231,38 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			p2.setString(9, usuario.getLogin());
 			p2.executeUpdate();
 			
-			return true;
+			return "Usuário alterado com sucesso!";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return e.getMessage();
+		}
 
+	}
+
+	
+	
+	
+	public boolean validaExistencia(String login) {
+
+		String comando = "SELECT login FROM usuarios WHERE login = '"+login+ "' ";
+		System.out.println(comando);
+		PreparedStatement p;
+		try {
+			p = this.conexao.prepareStatement(comando);
+			ResultSet rs = p.executeQuery(comando);
+
+			while (rs.next()) {
+				return true;
+			}
+			
+			return false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 
 	}
+	
 	
 	
 	
