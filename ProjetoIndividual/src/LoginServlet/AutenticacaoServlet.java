@@ -66,12 +66,12 @@ public class AutenticacaoServlet extends HttpServlet {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("login", request.getParameter("login"));
 			sessao.setAttribute("nivel_usuario", nivel);
-			response.sendRedirect("/ProjetoIndividual/pages/caixa/caixaInicio.html");
+			response.sendRedirect("/ProjetoIndividual/pages/caixa/index.html");
 		}else if (nivel == 3) {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("login", request.getParameter("login"));
 			sessao.setAttribute("nivel_usuario", nivel);
-			response.sendRedirect("/ProjetoIndividual/pages/estoquista/estoquistaInicio.html");
+			response.sendRedirect("/ProjetoIndividual/pages/estoquista/index.html");
 		}else {
 			response.sendRedirect("/ProjetoIndividual/index.html");
 			//response.sendRedirect("erro.html");

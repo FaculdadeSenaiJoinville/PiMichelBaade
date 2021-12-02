@@ -40,11 +40,11 @@ public class AutenticacaoServlet extends HttpServlet {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("md.digest: "+request.getParameter("senha").getBytes());
 		BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
 		
 		senmd5 = hash.toString(16);
-		System.out.println(senmd5);
+		System.out.println("senha nova: "+senmd5);
 		usuario.setSenha(senmd5);
 		Conexao conec = new Conexao();
 		Connection conexao = (Connection)conec.abrirConexao();
@@ -62,12 +62,12 @@ public class AutenticacaoServlet extends HttpServlet {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("login", request.getParameter("usuario"));
 			sessao.setAttribute("nivel_usuario", nivel);
-			response.sendRedirect("/pages/caixa/caixaInicio.html");
+			response.sendRedirect("/pages/caixa/index.html");
 		}else if (nivel == 3) {
 			HttpSession sessao = request.getSession();
 			sessao.setAttribute("login", request.getParameter("usuario"));
 			sessao.setAttribute("nivel_usuario", nivel);
-			response.sendRedirect("/pages/caixa/estoquistaInicio.html");
+			response.sendRedirect("/pages/caixa/index.html");
 		}else {
 			response.sendRedirect("/ProjetoIndividual/index.html");
 			//response.sendRedirect("erro.html");

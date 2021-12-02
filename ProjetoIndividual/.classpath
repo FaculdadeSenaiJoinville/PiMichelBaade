@@ -8,5 +8,9 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/activation-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/javamail-1.4.5/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

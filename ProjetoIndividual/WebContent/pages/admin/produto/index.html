@@ -1,111 +1,104 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="description" content="Site da Software dos Sonhos">
-<meta name="keywords" content="Padaria, Software, Sonhos">
-<meta name="author" content="Michel Baade">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Software dos Sonhos</title>
-<link rel="stylesheet" type="text/css" href="/ProjetoIndividual/css/admin.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-	crossorigin="anonymous"></script>
-<script src="/ProjetoIndividual/js/admin.js"></script>
-<script src="/ProjetoIndividual/js/categoria.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
- 
-<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script src="/ProjetoIndividual/js/produto.js"></script>
+<section class="secInserir">
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+	<h2>Registro de Produto</h2>
 
-</head>
-<body>
-	<section class="secInserir">
+	<form name="frmAddProduto" id="addProduto" class="frmInserir">
+		<fieldset>
+			<legend>Novo Produto</legend>
+			<table id="tableProduto">
 
-		<h2>Registro de Produto</h2>
+				<tr>
+					<th>Categoria</th>
+					<td><select name="categoriaId" id="selCategoria">
+							<option value="" class="buscando">Aguarde, buscando
+								categorias...</option>
+					</select></td>
 
-		<form name="frmAddProduto" id="addProduto" class="frmInserir">
-			<fieldset>
-				<legend>Novo Produto</legend>
-				<table id="tableProduto">
+					<th>Nome do Produto</th>
+					<td><input type="text" name="nome"></td>
 
-					<tr>
-						<th>Categoria</th>
-						<td> 
-						<select name="categoria">
-						
-						</select></td>
-						
-						<th>Nome do Produto</th>
-						<td><input type="text" name="nome"></td>
+				</tr>
+				<tr>
+					<th>Tipo</th>
+					<td><input type="radio" name="isvalorunidade" value="1"
+						id="tipoid" checked> <label for="tipoQ">Quantidade
+					</label> <input type="radio" name="isvalorunidade" value="2" id="tipoid2">
+						<label for="tipoP">Peso </label></td>
 
-						<th>Tipo</th>
-						<td>
-						<input type="radio" name="tipo" value="1">
-						<label for="tipoQ">Quantidade</label>
+					<th>Preço Por Unidade/Kg</th>
+					<td><input type="text" name="valor"></td>
 
-						<input type="radio" name="tipo" value="2"> 
-						<label for="tipoP">Peso</label>
-						</td>
-						
-						<th>Valor Por Unidade/Kg</th>
-						<td><input type="text" name="valor"></td>
+				</tr>
+				<tr id="botoesInserir">
+					<td colspan="8">
+						<button type="reset">Limpar</button>
+						<button type="button" onclick="SONHOS.produto.cadastrar()">Cadastrar</button>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
 
-					</tr>
-					<tr id="botoesInserir">
-						<td colspan="2">
-							<button type="reset">Limpar</button>
-							<button type="button" onclick="SONHOS.produto.cadastrar()">Cadastrar</button>
-						</td>
-					</tr>
-				</table>
-			</fieldset>
+	<h3>Produtos Registrados</h3>
+
+	<form id="filtraProduto" class="frmFiltrar">
+
+		<fieldset>
+			<legend>Filtrar</legend>
+
+			<input type="text" name="txtbusca" id="campoBuscaProduto"
+				placeholder="Nome do Produto">
+			<button type="button" onclick="SONHOS.produto.buscar()">Buscar</button>
+
+		</fieldset>
+
+	</form>
+
+	<div id="listaProdutos" class="listaRegistros"></div>
+
+
+	<div id="modalEditaProduto" class="modalEditar">
+		<form name="frmEditaProduto" id="editaProduto" class="frmEditar">
+			<table>
+
+				<tr>
+					<th>Categoria</th>
+					<td><select name="categoriaId" id="selCategoriaEdicao">
+							<option value="" class="buscando">Aguarde, buscando
+								categorias...</option>
+					</select></td>
+
+					<th>Nome do Produto</th>
+					<td><input type="text" name="nome"></td>
+
+				</tr>
+				
+				<tr>
+					<th>Tipo</th>
+					<td><input type="radio" name="isvalorunidade" value="1"
+						id="tipoid"> <label for="tipoQ">Quantidade </label> <input
+						type="radio" name="isvalorunidade" value="2" id="tipoid2">
+						<label for="tipoP">Peso </label></td>
+					<th>Preço Por Unidade/Kg</th>
+					<td><input type="text" name="valor"></td>
+
+				</tr>
+			</table>
+			<input type="hidden" name="idProduto">
 		</form>
+	</div>
 
-		<h3>Produtos Registrados</h3>
-
-		<form id="filtraProduto" class="frmFiltrar">
-
-			<fieldset>
-				<legend>Filtrar</legend>
-
-				<input type="text" name="txtbusca" id="campoBuscaProduto"
-					placeholder="Nome do Produto">
-				<button type="button" onclick="SONHOS.produto.buscar()">Buscar</button>
-
-			</fieldset>
-
+	<div id="modalExcluiProduto" class="modalEditar">
+		<form name="frmExcluiProduto" id="editaProduto" class="frmEditar">
+			<input type="hidden" name="idProduto">
+			<table>
+				<tr>
+					<th>Tem certeza que deseja excluir esse produto?</th>
+				</tr>
+			</table>
 		</form>
+	</div>
 
-		<div id="listaCategorias" class="listaRegistros"></div>
 
-
-		<div id="modalEditaCategoria" class="modalEditar">
-			<form name="frmEditaCategoria" id="editaCategoria" class="frmEditar">
-				<table>
-					<tr>
-						<th>Nome da Categoria</th>
-						<td><input type="text" name="nome"></td>
-					</tr>
-				</table>
-				<input type="hidden" name="idCategoria">
-			</form>
-		</div>
-		
-		<div id="modalExcluiCategoria" class="modalEditar">
-			<form name="frmExcluiCategoria" id="editaCategoria" class="frmEditar">
-				<input type="hidden" name="idCategoria">
-				<table>
-					<tr>
-						<th>Tem certeza que deseja excluir essa categoria?</th>
-					</tr>
-				</table>
-			</form>
-		</div>
-
-		
-	</section>
-	<div id="modalAviso"></div>
-</body>
-</html>
+</section>

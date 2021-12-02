@@ -39,18 +39,35 @@ public class CategoriaRest extends UtilRest {
 
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
 
-			boolean retorno = jdbcCategoria.inserir(categoria);
-
-			String msg = "";
-
-			if (retorno) {
-				msg = "Categoria cadastrada com sucesso!";
-			} else {
-				msg = "Erro ao cadastrar categoria.";
-			}
+			String retorno = jdbcCategoria.inserir(categoria);
+		
 			conec.fecharConexao();
 
-			return this.buildResponse(msg);
+			return this.buildResponse(retorno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	
+	@GET
+	@Path("/buscar")
+	@Consumes("application/*")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscar() {
+
+		try {
+
+			List<Categoria> listaCategorias = new ArrayList<Categoria>();
+
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
+			listaCategorias = jdbcCategoria.buscar();
+			conec.fecharConexao();
+			
+			return this.buildResponse(listaCategorias);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -58,9 +75,11 @@ public class CategoriaRest extends UtilRest {
 		}
 
 	}
+	
+	
 
 	@GET
-	@Path("/buscar")
+	@Path("/buscarPorNome")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorNome(@QueryParam("valorBusca") String nome) {
@@ -97,17 +116,10 @@ public class CategoriaRest extends UtilRest {
 			Connection conexao = conec.abrirConexao();
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
 
-			boolean retorno = jdbcCategoria.deletar(id);
-
-			String msg = "";
-
-			if (retorno) {
-				msg = "Categoria excluida com sucesso!";
-			} else {
-				msg = "Erro ao excluir categoria.";
-			}
+			String retorno = jdbcCategoria.deletar(id);
+		
 			conec.fecharConexao();
-			return this.buildResponse(msg);
+			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -148,17 +160,10 @@ public class CategoriaRest extends UtilRest {
 			Connection conexao = conec.abrirConexao();
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
 
-			boolean retorno = jdbcCategoria.alterar(categoria);
+			String retorno = jdbcCategoria.alterar(categoria);
 
-			String msg = "";
-
-			if (retorno) {
-				msg = "Categoria alterada com sucesso!";
-			} else {
-				msg = "Erro ao alterar categoria.";
-			}
 			conec.fecharConexao();
-			return this.buildResponse(msg);
+			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

@@ -22,7 +22,7 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 		this.conexao = conexao;
 	}
 
-	public boolean inserir(Categoria categoria) {
+	public String inserir(Categoria categoria) {
 
 		String comando = "SELECT id FROM categorias WHERE nome ='" + categoria.getNome() + "' && id != "
 				+ categoria.getId() + " ";
@@ -32,7 +32,7 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 			ResultSet rs = p.executeQuery(comando);
 
 			while (rs.next()) {
-				return false;
+				return "Já existe uma categoria com o mesmo nome.";
 			}
 		
 
@@ -44,16 +44,50 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 			p2.setString(2, categoria.getNome());
 
 			p2.execute();
-			return true;
+			return "Categoria cadastrada com sucesso!";
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return e.getMessage();
 		}
 	}
+	
+public List<Categoria> buscar() {
+		
+		String comando = "SELECT * FROM categorias ";
+
+		List<Categoria> listaCategorias = new ArrayList<Categoria>();
+
+		try {
+
+			Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+
+			while (rs.next()) {
+				
+				Categoria categoria = new Categoria();
+				
+				int id = rs.getInt("id");
+				String catNome = rs.getString("nome");
+
+				categoria.setId(id);
+				categoria.setNome(catNome);
+
+				listaCategorias.add(categoria);
+			}
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaCategorias;
+	}
+	
 
 	public List<JsonObject> buscarPorNome(String nome) {
-
+		
+		System.out.println("nome: "+nome);
 		String comando = "SELECT * FROM categorias ";
 		if (!nome.equals("")) {
 			comando += "WHERE nome LIKE '%" + nome + "%' ";
@@ -89,20 +123,30 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 
 	}
 
-	public boolean deletar(int id) {
-		String comando = "DELETE FROM categorias WHERE id = ?";
+	public String deletar(int id) {
+		
+		String comando = "SELECT id FROM produtos WHERE categorias_id = "+id;
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
+			ResultSet rs = p.executeQuery(comando);
 
-			p.setInt(1, id);
-			p.execute();
+			while (rs.next()) {
+				return "Não é possível excluir uma categoria onde há produtos cadastrados.";
+			}
+		
+		
+			String comando2 = "DELETE FROM categorias WHERE id = ?";
+			PreparedStatement p2;
+			p2 = this.conexao.prepareStatement(comando2);
 
+			p2.setInt(1, id);
+			p2.execute();
+			return "Categoria excluída com sucesso!";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
-		}
-		return true;
+			return e.getMessage();
+		}		
 	}
 
 	public Categoria buscarPorId(int id) {
@@ -130,7 +174,7 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 		return categoria;
 	}
 
-	public boolean alterar(Categoria categoria) {
+	public String alterar(Categoria categoria) {
 
 		String comando = "SELECT id FROM categorias WHERE nome ='" + categoria.getNome() + "' && id != "
 				+ categoria.getId() + " ";
@@ -140,7 +184,7 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 			ResultSet rs = p.executeQuery(comando);
 
 			while (rs.next()) {
-				return false;
+				return "Já existe uma categoria com esse nome.";
 			}
 
 			String comando2 = "UPDATE categorias SET nome=? WHERE id=?";
@@ -151,11 +195,11 @@ public class JDBCCategoriaDAO implements CategoriaDAO {
 
 			p2.executeUpdate();
 
-			return true;
+			return "Categoria alterada com sucesso!";
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-			return false;
+			return e1.getMessage();
 		}
 
 	}

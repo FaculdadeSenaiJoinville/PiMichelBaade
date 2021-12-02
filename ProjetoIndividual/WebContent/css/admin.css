@@ -167,6 +167,37 @@ h2{
 	font-weight: bold;
 }
 
+
+.frmInserir .botaoAdd{
+	background-color: #00800000;
+	border: none;
+}
+
+.frmInserir .botaoRemove{
+	background-color: #ff0000;
+}
+
+.frmInserir fieldset{
+	margin: 0px auto;
+	width: fit-content;
+}
+.frmInserir .campoPequeno{
+	width: 100px;
+	padding: 2px 0;
+}
+
+.frmInserir .campoMedio{
+	width: 200px;
+	padding: 2px 0;
+}
+
+.frmInserir .campoGrande{
+	width: 300px;
+	padding: 2px 0;
+}
+
+
+
 .listaRegistros{
 	margin-bottom: 10px;
 }
@@ -254,6 +285,32 @@ td a{
 }
 
 
+.frmInserir table #addProduto{
+	width: 1030px;
+}
+
+.frmInserir #addProduto{	
+	width: 1030px;
+}
+#addProduto{
+	width: 1030px;
+}
+#tableProduto{
+	width: 1030px;
+}
+
+#tipoid{
+	width: auto;
+}
+#tipoid2{
+	width: auto;
+}
+
 #addUsuario th{
 	width: auto;
 }
+
+.tituloAlterar{
+	padding-top: 75px;
+}
+

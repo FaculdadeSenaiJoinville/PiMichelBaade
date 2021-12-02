@@ -211,6 +211,12 @@ $(document).ready(function() {
 	
 	SONHOS.usuario.exibirEdicao = function(login){
 		
+		
+		
+		
+		
+		
+		
 		$.ajax({
 			type:"GET",
 			url: SONHOS.PATH + "usuario/buscarPorLogin",
@@ -221,7 +227,7 @@ $(document).ready(function() {
 				
 				//usuario.senha = btoa(document.frmEditaUsuario.senha.value);
 	
-				document.frmEditaUsuario.senha.value = usuario.senha;
+				//document.frmEditaUsuario.senha.value = usuario.senha;
 				document.frmEditaUsuario.nivel_usuario.value = usuario.nivel_usuario;
 				document.frmEditaUsuario.datanasc.value = usuario.data_nasc;
 				document.frmEditaUsuario.cpf.value = usuario.cpf;

@@ -19,7 +19,7 @@ img{
     max-width: 47px; 
     max-height: 47px;
 }
-form{
+#frmLogin{
 	border:4px solid #000;
 	width: 33%;
 	margin: 100px auto;
@@ -38,7 +38,7 @@ form{
 a{
 	text-decoration: underline;
 }
-button{
+.login{
 	width: 25%;
 	font-size: 16px;
 	margin: 0 10%;
@@ -95,4 +95,7 @@ nav #logomenor{
 section{
 	text-align: center;
 	margin-top: 350px;
+}
+#modalEsqueciSenha {
+display:none
 }

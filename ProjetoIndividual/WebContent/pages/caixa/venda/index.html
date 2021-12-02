@@ -1,0 +1,62 @@
+<script src="/ProjetoIndividual/js/venda.js"></script>
+<section class="secInserir">
+
+	<h2>Registro de Vendas</h2>
+
+	<form name="frmAddVenda" id="addVenda" class="frmInserir">
+		<fieldset>
+			<legend>Nova Venda</legend>
+			<table>
+
+				<tr>
+					<th>Categoria</th>
+					<th>Produto</th>
+					<th></th>
+					<th>Quantidade/Peso</th>
+					<th>Valor</th>
+					<th><button type="button" name="addProduto" class="botaoAdd"><img src='/ProjetoIndividual/imgs/mais.png' alt='Adicionar linha'></button>
+					</th>
+					<!---->
+				</tr>
+	
+				<tr class="detalhes">
+				
+					<td><select name="selCategoria[]" class="campoMedio" onchange="SONHOS.venda.carregarProdutos()">
+							<option value="" class="buscando">Aguarde, buscando
+								categorias...</option>
+					</select></td>
+
+					
+					<td><select name="selProduto[]" class="campoGrande" onchange="SONHOS.venda.AtualizaValor()">
+							<option value="" class="buscando">Selecione a categoria</option>
+					</select></td>
+					<td><input type="hidden" name="ValorProduto[]"></td>
+					
+					<td><input type="text" name="QuantidadePeso[]" class="campoPequeno" value="0" onfocusout="SONHOS.venda.AtualizaValor()"></td>
+					<td><a>R$</a><input type="text" name="valor[]" class="campoPequeno" disabled value="0"></td>
+				<!-- disabled -->
+				<td><a onclick="SONHOS.venda.removeCampo(this)"><img src='/ProjetoIndividual/imgs/menos.png' alt='Excluir linha'></a></td>
+					
+					
+				</tr>
+				
+				<tr>
+				<td colspan="3">
+				</td>
+				<td>
+				<a><div id="totalValores"></div></a>
+				</td>
+				</tr>
+				
+				<tr id="botoesInserir">
+					<td colspan="8">
+						<button type="reset">Limpar</button>
+						<button type="button" onclick="SONHOS.venda.cadastrar()">Cadastrar</button>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+
+
+</section>

@@ -1,9 +1,15 @@
 package br.com.projetoindividual.rest;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -37,6 +44,31 @@ public class UsuarioRest extends UtilRest {
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
 			String retorno = jdbcUsuario.inserir(usuario);
+			
+			
+
+			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
+			System.out.println("Texto deserializado: "+textodeserializado);
+			
+			String senmd5 = "";
+			
+			MessageDigest md = null;
+			
+			try {
+				md = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+			
+			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
+			
+			senmd5 = hash.toString(16);
+			System.out.println(senmd5);
+			usuario.setSenha(senmd5);
+			
+			
+			
+			
 			conec.fecharConexao();
 			return this.buildResponse(retorno);
 		} catch (Exception e) {
@@ -94,6 +126,31 @@ public class UsuarioRest extends UtilRest {
 		}
 
 	}
+	
+	
+	@GET
+	@Path("/buscarSenha")
+	@Consumes("application/*")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarSenha(@QueryParam("login") String login) {
+
+		try {
+			
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
+			String senha = jdbcUsuario.buscarSenha(login);
+			
+			
+			conec.fecharConexao();
+			return this.buildResponse(senha);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+
+	}
+	
 
 	@GET
 	@Path("/buscarPorLogin")
@@ -115,6 +172,37 @@ public class UsuarioRest extends UtilRest {
 		}
 
 	}
+	
+	
+	@GET
+	@Path("/buscarPorLoginAlterar")
+	@Consumes("application/*")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscarPorLoginAlterar(@Context HttpServletRequest req) {
+
+		try {
+			Usuario usuario = new Usuario();
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
+			
+			
+			HttpSession sessao = req.getSession();
+			
+			String log = (String) sessao.getAttribute("login");
+			
+			usuario = jdbcUsuario.buscarPorLogin(log);
+			conec.fecharConexao();
+			return this.buildResponse(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+
+	}
+	
+	
+	
 
 	@PUT
 	@Path("/alterar")

@@ -8,10 +8,10 @@ import br.com.projetoindividual.modelo.Categoria;
 
 public interface CategoriaDAO {
 
-	public boolean inserir(Categoria categoria);
+	public String inserir(Categoria categoria);
 	public List<JsonObject> buscarPorNome(String nome);
-	public boolean deletar(int id);
+	public String deletar(int id);
 	public Categoria buscarPorId(int id);
-	public boolean alterar(Categoria categoria);
+	public String alterar(Categoria categoria);
 	
 }

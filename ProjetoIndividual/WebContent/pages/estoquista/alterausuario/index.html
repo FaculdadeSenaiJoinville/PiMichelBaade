@@ -1,0 +1,58 @@
+<script src="/ProjetoIndividual/js/alterausuario.js"></script>
+<section class="secAlterar">
+
+	<h2 class="tituloAlterar">Alteração de Usuário</h2>
+	<form name="frmEditaUsuario" id="editaUsuario" class="frmInserir">
+		<table>
+			<tr>
+				<th>Nome Completo</th>
+				<td><input type="text" name="nome" id="nome"></td>
+				<th>CPF</th>
+				<td><input type="text" name="cpf" id="cpf"></td>
+				<th>Data de Nascimento</th>
+				<td><input type="date" name="datanasc" id="datanasc"></td>
+			</tr>
+
+			<tr>
+				<th>Telefone</th>
+				<td><input type="text" name="telefone" id="telefone"></td>
+				<th>E-mail</th>
+				<td><input type="email" name="email" id="email"></td>
+
+			</tr>
+			<tr>
+				<th>Login</th>
+				<td><input type="text" name="login" id="login" disabled></td>
+				<th>Senha</th>
+				<td><input type="password" name="senha" id="senha"></td>
+
+			</tr>
+			<tr>
+				<td colspan="6"><a>Sua senha está vazia por segurança, caso
+						a mesma seja salva assim, ela não será alterada e se manterá a
+						mesma</a></td>
+
+			</tr>
+			<input type="hidden" name="nivel_usuario" id="nivel_usuario">
+			<tr id="botoesInserir">
+				<td colspan="6">
+					<button type="button" onclick="SONHOS.alterausuario.exibirEdicao()">Resetar</button>
+					<button type="button" onclick="validaUsuario()">Alterar</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+
+
+	<div id="modalConfirmarEdicao" class="modalEditar">
+		<form name="frmConfirmarUsuario" id="editaUsuario" class="frmEditar">
+			<input type="hidden" name="login">
+			<table>
+				<tr>
+					<th>Tem certeza que deseja confirmar a alteração?</th>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</section>

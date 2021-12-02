@@ -62,4 +62,14 @@
   </servlet-mapping>  
   
   
+  <servlet>  
+    <description></description>  
+    <servlet-name>RedefinirSenhaServlet</servlet-name>  
+    <servlet-class>RedefinirSenhaServlet.RedefinirSenhaServlet</servlet-class>
+  </servlet>  
+  <servlet-mapping>  
+    <servlet-name>RedefinirSenhaServlet</servlet-name>  
+    <url-pattern>/redefinirsenha</url-pattern> 
+  </servlet-mapping>  
+  
 </web-app>

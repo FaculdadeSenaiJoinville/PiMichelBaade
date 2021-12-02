@@ -73,7 +73,7 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			p2.setString(6, usuario.getNome());
 			p2.setString(7, usuario.getEmail());
 			p2.setLong(8, usuario.getTelefone());
-
+			System.out.println("data: "+usuario.getData_nasc());
 			p2.execute();
 			return "Usuário cadastrado com sucesso!";
 
@@ -142,7 +142,30 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 		}		
 	}
 
+	public String buscarSenha(String login) {
+		String comando = "SELECT senha FROM usuarios WHERE login = ?";
 
+		System.out.println("busca"+login);
+		try {
+			PreparedStatement p = this.conexao.prepareStatement(comando);
+			
+			p.setString(1, login);
+
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+
+				return  rs.getString("senha");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Ocorreu um erro ao buscar a senha";
+	}
+	
+	
+	
 	public Usuario buscarPorLogin(String login) {
 		String comando = "SELECT * FROM usuarios WHERE login = ?";
 
@@ -183,9 +206,9 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 	}
 
 	public String alterar(Usuario usuario) {
-		
-		String comando = "SELECT login FROM usuarios WHERE (cpf =" + usuario.getCpf() + " || email ='" + usuario.getEmail() +"') && login != '"
-				+ usuario.getLogin() + "' ";
+
+		String comando = "SELECT login FROM usuarios WHERE (cpf =" + usuario.getCpf() + " || email ='"
+				+ usuario.getEmail() + "') && login != '" + usuario.getLogin() + "' ";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
@@ -194,41 +217,52 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			while (rs.next()) {
 				return "Já existe um usuário com o mesmo Login,CPF ou E-mail.";
 			}
-			
-			String comando2 = "UPDATE usuarios SET login=?,senha=?,nivel_usuario=?,data_nasc=?,cpf=?,nome=?,email=?,telefone=? WHERE login = ?";
+
+			String comando2 = "";
+			boolean alterarSenha = true;
+
+			if (usuario.getSenha().equals("")) {
+				comando2 = "UPDATE usuarios SET nivel_usuario=?,data_nasc=?,cpf=?,nome=?,email=?,telefone=? WHERE login = ?";
+				alterarSenha = false;
+			} else {
+				comando2 = "UPDATE usuarios SET nivel_usuario=?,data_nasc=?,cpf=?,nome=?,email=?,telefone=?,senha=? WHERE login = ?";
+			}
+
 			PreparedStatement p2 = this.conexao.prepareStatement(comando2);
 
-			
 			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
-			System.out.println("Texto deserializado: "+textodeserializado);
-			
+			// System.out.println("Texto deserializado: "+textodeserializado);
+
 			String senmd5 = "";
-			
+
 			MessageDigest md = null;
-			
+
 			try {
 				md = MessageDigest.getInstance("MD5");
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
-			
+
 			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
-			
+
 			senmd5 = hash.toString(16);
-			System.out.println(senmd5);
+			// System.out.println(senmd5);
 			usuario.setSenha(senmd5);
-			
-			
-			
-			p2.setString(1, usuario.getLogin());
-			p2.setString(2, usuario.getSenha());
-			p2.setInt(3, usuario.getNivel_usuario());
-			p2.setString(4, usuario.getData_nasc());
-			p2.setLong(5, usuario.getCpf());
-			p2.setString(6, usuario.getNome());
-			p2.setString(7, usuario.getEmail());
-			p2.setLong(8, usuario.getTelefone());
-			p2.setString(9, usuario.getLogin());
+
+			p2.setInt(1, usuario.getNivel_usuario());
+			p2.setString(2, usuario.getData_nasc());
+			p2.setLong(3, usuario.getCpf());
+			p2.setString(4, usuario.getNome());
+			p2.setString(5, usuario.getEmail());
+			p2.setLong(6, usuario.getTelefone());
+
+			if (alterarSenha) {
+				p2.setString(7, usuario.getSenha());
+				p2.setString(8, usuario.getLogin());
+			} else {
+				p2.setString(7, usuario.getLogin());
+			}
+			System.out.println(p2);
 			p2.executeUpdate();
 			
 			return "Usuário alterado com sucesso!";

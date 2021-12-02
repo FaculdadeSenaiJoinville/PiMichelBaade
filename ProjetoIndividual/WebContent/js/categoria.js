@@ -20,7 +20,7 @@ $(document).ready(function() {
 				success: function(msg){								
 					SONHOS.exibirAviso(msg);
 					$("#addCategoria").trigger("reset");
-					SONHOS.categoria.buscar();
+					SONHOS.categoria.buscarPorNome();
 				},
 				error: function (info){
 					SONHOS.exibirAviso("Erro ao cadastrar uma nova categoria: "+ info.status +" - "+ info.statusText);
@@ -31,14 +31,14 @@ $(document).ready(function() {
 	}
 	
 	
-	SONHOS.categoria.buscar = function(){
+	SONHOS.categoria.buscarPorNome = function(){
 	
 	var valorBusca = $("#campoBuscaCategoria").val();
 	
 	$.ajax({
 				
 				type: "GET",
-				url: SONHOS.PATH+"categoria/buscar",
+				url: SONHOS.PATH+"categoria/buscarPorNome",
 				data:"valorBusca="+valorBusca,
 				success: function(dados){
 					
@@ -84,7 +84,7 @@ $(document).ready(function() {
 	};
 	
 	
-	SONHOS.categoria.buscar();
+	SONHOS.categoria.buscarPorNome();
 	
 	
 	
@@ -94,7 +94,7 @@ $(document).ready(function() {
 			type:"DELETE",
 			url: SONHOS.PATH + "categoria/excluir/"+id,
 			success: function(msg){
-				SONHOS.categoria.buscar();
+				SONHOS.categoria.buscarPorNome();
 				SONHOS.exibirAviso(msg);				
 				$("#modalExcluiCategoria").dialog("close");			
 			},
@@ -196,7 +196,7 @@ $(document).ready(function() {
 			data: JSON.stringify(categoria),
 			success: function(msg){
 				SONHOS.exibirAviso(msg);
-				SONHOS.categoria.buscar();
+				SONHOS.categoria.buscarPorNome();
 				$("#modalEditaCategoria").dialog("close");
 			},
 			error: function(info){

@@ -1,8 +1,9 @@
+<script src="/ProjetoIndividual/js/login.js"></script>
 <img src="/ProjetoIndividual/imgs/logomenor.png" alt="Logo da Software dos Sonhos" id="logomenor">
 <nav>
 <a href="#"><div class="opcao">Início</div></a>
-<a href="#"><div class="opcao">Categorias</div></a>
-<a href="#"><div class="opcao">Produtos</div></a>
+<a href="#"><div class="opcao" onclick="SONHOS.carregaPagina('categoria')">Categorias</div></a>
+<a href="#" onclick="SONHOS.carregaPagina('produto')"><div class="opcao">Produtos</div></a>
 <a href="/ProjetoIndividual/logout"><div class="opcao direita">Sair</div></a>
-<a href="#"><div class="opcao direita">Estoquista</div></a>
+<a href="#" onclick="SONHOS.carregaPagina('alterausuario')"><div id="nomeUsuario" class="opcao direita"></div></a>
 </nav>
