@@ -108,27 +108,24 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bdsonhos`.`vendas_has_produtos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `bdsonhos`.`vendas_has_produtos` ;
 
-CREATE TABLE IF NOT EXISTS `bdsonhos`.`vendas_has_produtos` (
-  `vendas_id` INT UNSIGNED NOT NULL COMMENT 'Neste campo será armazenado o id da venda.',
-  `produtos_id` INT UNSIGNED NOT NULL COMMENT 'Neste campo será armazenado o id do produto vendido.',
-  `valor` DECIMAL(9,2) UNSIGNED NOT NULL COMMENT 'Neste campo será armazenado o valor do produto vendido.',
-  `quantidade` FLOAT UNSIGNED NOT NULL COMMENT 'Neste campo será armazenado a quantidade do produto vendido.',
-  PRIMARY KEY (`vendas_id`, `produtos_id`),
-  INDEX `fk_vendas_has_produtos_produtos1_idx` (`produtos_id` ASC) VISIBLE,
-  INDEX `fk_vendas_has_produtos_vendas1_idx` (`vendas_id` ASC) VISIBLE,
-  CONSTRAINT `fk_vendas_has_produtos_vendas1`
-    FOREIGN KEY (`vendas_id`)
-    REFERENCES `bdsonhos`.`vendas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vendas_has_produtos_produtos1`
-    FOREIGN KEY (`produtos_id`)
-    REFERENCES `bdsonhos`.`produtos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+
+
+DROP TABLE IF EXISTS `vendas_has_produtos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vendas_has_produtos` (
+  `id_vendas_has` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `vendas_id` int(10) unsigned NOT NULL COMMENT 'Neste campo será armazenado o id da venda.',
+  `produtos_id` int(10) NOT NULL COMMENT 'Neste campo será armazenado o id do produto vendido.',
+  `valor` decimal(9,2) unsigned NOT NULL COMMENT 'Neste campo será armazenado o valor do produto vendido.',
+  `quantidade` float unsigned NOT NULL COMMENT 'Neste campo será armazenado a quantidade do produto vendido.',
+  PRIMARY KEY (`id_vendas_has`),
+  KEY `fk_vendas_has_produtos_produtos1_idx` (`produtos_id`),
+  KEY `fk_vendas_has_produtos_vendas1_idx` (`vendas_id`),
+  CONSTRAINT `fk_vendas_has_produtos_vendas1` FOREIGN KEY (`vendas_id`) REFERENCES `vendas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
