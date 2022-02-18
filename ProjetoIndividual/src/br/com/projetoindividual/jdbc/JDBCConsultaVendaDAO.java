@@ -24,7 +24,6 @@ public class JDBCConsultaVendaDAO implements ConsultaVendaDAO {
 		String comando = "SELECT SUM(vendas_has_produtos.produtos_id) as produtosAparicao, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE CAST(data_venda AS DATE) >= '"
 				+ dataInicio + "' AND CAST(data_venda AS DATE) <= '" + dataFinal
 				+ "' GROUP BY vendas_has_produtos.produtos_id LIMIT 5";
-		System.out.println(comando);
 		try {
 			Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -48,7 +47,6 @@ public class JDBCConsultaVendaDAO implements ConsultaVendaDAO {
 		String comando = "SELECT SUM(vendas_has_produtos.quantidade) as quantidade, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE produtos.isvalorunidade = 1 AND CAST(data_venda AS DATE) >= '"
 				+ dataInicio + "' AND CAST(data_venda AS DATE) <= '" + dataFinal
 				+ "' GROUP BY vendas_has_produtos.produtos_id LIMIT 5";
-		System.out.println(comando);
 		try {
 			Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -72,7 +70,6 @@ public class JDBCConsultaVendaDAO implements ConsultaVendaDAO {
 		String comando = "SELECT SUM(vendas_has_produtos.quantidade) as quantidade, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE produtos.isvalorunidade = 2 AND CAST(data_venda AS DATE) >= '"
 				+ dataInicio + "' AND CAST(data_venda AS DATE) <= '" + dataFinal
 				+ "' GROUP BY vendas_has_produtos.produtos_id LIMIT 5";
-		System.out.println(comando);
 		try {
 			Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);

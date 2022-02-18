@@ -48,9 +48,7 @@ public class JDBCRedefinirSenha implements RedefinirSenhaDAO {
 					emailEnviar.setMsg("Olá, sua senha no Software dos Sonhos foi redefinida para: " + novaSenha);
 					emailEnviar.send();
 				} catch (Exception e) {
-
-					System.out.println(e.getMessage());
-
+					e.printStackTrace();
 				}
 				return "Sua senha foi alterada corretamente e estará no seu e-mail!";
 			} else {
@@ -80,10 +78,7 @@ public class JDBCRedefinirSenha implements RedefinirSenhaDAO {
 				int a = ran.nextInt(caracteres.length);
 				senhaNova += caracteres[a];
 			}
-			System.out.println("Senha nova: " + senhaNova);
-
 			String encoded = new String(Base64.getEncoder().encode(senhaNova.getBytes()));
-			System.out.println(encoded);
 			String senmd5 = "";
 
 			MessageDigest md = null;
@@ -98,17 +93,13 @@ public class JDBCRedefinirSenha implements RedefinirSenhaDAO {
 			byte[] bytes = md.digest();
 			BigInteger hash = new BigInteger(1, bytes);
 
-			System.out.println(bytes);
 			senmd5 = hash.toString(16);
-			System.out.println(senmd5);
-
+			
 			p2.setString(1, senmd5);
 			p2.setString(2, email);
 
-			System.out.println(p2);
 			p2.executeUpdate();
 
-			System.out.println("return senhaNova: " + senhaNova);
 			return senhaNova;
 		} catch (SQLException e) {
 			e.printStackTrace();

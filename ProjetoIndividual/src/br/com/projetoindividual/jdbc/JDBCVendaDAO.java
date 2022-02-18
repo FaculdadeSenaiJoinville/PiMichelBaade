@@ -33,7 +33,6 @@ public class JDBCVendaDAO implements VendaDAO {
 			PreparedStatement p = this.conexao.prepareStatement(comando, PreparedStatement.RETURN_GENERATED_KEYS);
 			p.setString(1, timeStamp);
 			p.setString(2, venda.getLogin());
-			//System.out.println(comando);
 			
 			List<Integer> idsProdutos = new ArrayList<Integer>();
 			
@@ -80,7 +79,6 @@ public class JDBCVendaDAO implements VendaDAO {
 			
 		
 				String comando = "SELECT valor FROM produtos WHERE id = "+idProduto;
-				//System.out.println(comando);
 				Statement stmt = conexao.createStatement();
 				
 				ResultSet rs = stmt.executeQuery(comando);

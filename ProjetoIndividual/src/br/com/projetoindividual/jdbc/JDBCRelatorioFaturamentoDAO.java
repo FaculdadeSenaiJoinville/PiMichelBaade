@@ -28,20 +28,17 @@ public class JDBCRelatorioFaturamentoDAO implements RelatorioFaturamentoDAO {
 		
 		
 		String comando = "SELECT CAST(data_venda AS DATE) as data, COUNT(distinct vendas.id) as quantidade, SUM(vendas_has_produtos.valor) as valorTotal FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id WHERE CAST(data_venda AS DATE) >= '"+dataInicio+"' AND CAST(data_venda AS DATE) <= '"+dataFinal+"' GROUP BY CAST(data_venda AS DATE)";
-		System.out.println(comando);
-		
+	
 		try {
 
 			
 			String dataIni = dataInicio.replaceAll("-", "/");
 			String[] s = dataIni.split("/");
 			String dataInicioFormatada = s[2]+"/"+s[1]+"/"+s[0];
-			System.out.println("formatada: "+dataInicioFormatada);
 			
 			String dataFim = dataFinal.replaceAll("-", "/");
 			String[] sp = dataFim.split("/");
 			String dataFinalFormatada = sp[2]+"/"+sp[1]+"/"+sp[0];
-			System.out.println("formatada: "+dataFinalFormatada);
 			
 			Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);

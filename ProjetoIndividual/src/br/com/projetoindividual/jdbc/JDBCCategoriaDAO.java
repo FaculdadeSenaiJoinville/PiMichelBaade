@@ -87,7 +87,6 @@ public List<Categoria> buscar() {
 
 	public List<JsonObject> buscarPorNome(String nome) {
 		
-		System.out.println("nome: "+nome);
 		String comando = "SELECT * FROM categorias ";
 		if (!nome.equals("")) {
 			comando += "WHERE nome LIKE '%" + nome + "%' ";

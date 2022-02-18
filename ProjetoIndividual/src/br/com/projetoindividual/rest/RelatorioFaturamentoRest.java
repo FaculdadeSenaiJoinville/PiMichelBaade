@@ -57,7 +57,6 @@ public class RelatorioFaturamentoRest extends UtilRest  {
 			Connection conexao = conec.abrirConexao();
 			JDBCRelatorioFaturamentoDAO jdbcRelatorioFaturamento = new JDBCRelatorioFaturamentoDAO(conexao);
 			listaRegistros = jdbcRelatorioFaturamento.buscar(dataInicio,dataFinal);
-			System.out.println(listaRegistros);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaRegistros);
 			

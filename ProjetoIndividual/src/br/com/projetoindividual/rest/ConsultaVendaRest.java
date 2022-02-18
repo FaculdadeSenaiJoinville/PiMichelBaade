@@ -44,7 +44,6 @@ public class ConsultaVendaRest extends UtilRest  {
 			Connection conexao = conec.abrirConexao();
 			JDBCConsultaVendaDAO jdbcConsultaVenda = new JDBCConsultaVendaDAO(conexao);
 			listaRegistros = jdbcConsultaVenda.produtosMaisVendidos(dataInicio, dataFinal);
-			System.out.println(listaRegistros);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaRegistros);
 			return this.buildResponse(json);
@@ -76,7 +75,6 @@ public class ConsultaVendaRest extends UtilRest  {
 			Connection conexao = conec.abrirConexao();
 			JDBCConsultaVendaDAO jdbcConsultaVenda = new JDBCConsultaVendaDAO(conexao);
 			listaRegistros = jdbcConsultaVenda.produtosMaisVendidosKg(dataInicio, dataFinal);
-			System.out.println(listaRegistros);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaRegistros);
 			return this.buildResponse(json);
@@ -108,7 +106,6 @@ public class ConsultaVendaRest extends UtilRest  {
 			Connection conexao = conec.abrirConexao();
 			JDBCConsultaVendaDAO jdbcConsultaVenda = new JDBCConsultaVendaDAO(conexao);
 			listaRegistros = jdbcConsultaVenda.produtosMaisVendidosUnidade(dataInicio, dataFinal);
-			System.out.println(listaRegistros);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaRegistros);
 			return this.buildResponse(json);

@@ -29,10 +29,7 @@ public class AutenticacaoServlet extends HttpServlet {
 		Usuario usuario = new Usuario();
 		
 		usuario.setLogin(request.getParameter("login"));
-		System.out.println(request.getParameter("login"));
-		System.out.println(request.getParameter("senha"));
 		String textodeserializado = new String(Base64.getUrlDecoder().decode(request.getParameter("senha")));
-		System.out.println("Texto deserializado: "+textodeserializado);
 		
 		String senmd5 = "";
 		
@@ -47,7 +44,6 @@ public class AutenticacaoServlet extends HttpServlet {
 		BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
 		
 		senmd5 = hash.toString(16);
-		System.out.println(senmd5);
 		usuario.setSenha(senmd5);
 		Conexao conec = new Conexao();
 		Connection conexao = (Connection)conec.abrirConexao();
@@ -55,7 +51,6 @@ public class AutenticacaoServlet extends HttpServlet {
 		JDBCAutenticaDAO jdbAutentica =  new JDBCAutenticaDAO(conexao);
 		int nivel = jdbAutentica.consultar(usuario);
 		usuario.setNivel_usuario(nivel);
-		System.out.println("nivel certo: "+nivel);
 		
 		if (nivel == 1) {
 			HttpSession sessao = request.getSession();

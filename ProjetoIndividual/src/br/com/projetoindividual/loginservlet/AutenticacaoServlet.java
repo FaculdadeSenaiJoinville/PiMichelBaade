@@ -29,7 +29,6 @@ public class AutenticacaoServlet extends HttpServlet {
 		
 		usuario.setLogin(request.getParameter("usuario"));
 		String textodeserializado = new String(Base64.getUrlDecoder().decode(request.getParameter("senha")));
-		System.out.println("Texto deserializado: "+textodeserializado);
 		
 		String senmd5 = "";
 		
@@ -40,11 +39,9 @@ public class AutenticacaoServlet extends HttpServlet {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		System.out.println("md.digest: "+request.getParameter("senha").getBytes());
 		BigInteger hash = new BigInteger(1, md.digest(request.getParameter("senha").getBytes()));
 		
 		senmd5 = hash.toString(16);
-		System.out.println("senha nova: "+senmd5);
 		usuario.setSenha(senmd5);
 		Conexao conec = new Conexao();
 		Connection conexao = (Connection)conec.abrirConexao();

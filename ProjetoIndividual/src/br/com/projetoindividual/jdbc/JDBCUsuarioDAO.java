@@ -43,7 +43,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			
 			
 			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
-			System.out.println("Texto deserializado: "+textodeserializado);
 			
 			String senmd5 = "";
 			
@@ -58,7 +57,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
 			
 			senmd5 = hash.toString(16);
-			System.out.println(senmd5);
 			usuario.setSenha(senmd5);
 			
 			
@@ -73,7 +71,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			p2.setString(6, usuario.getNome());
 			p2.setString(7, usuario.getEmail());
 			p2.setLong(8, usuario.getTelefone());
-			System.out.println("data: "+usuario.getData_nasc());
 			p2.execute();
 			return "Usuário cadastrado com sucesso!";
 
@@ -145,7 +142,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 	public String buscarSenha(String login) {
 		String comando = "SELECT senha FROM usuarios WHERE login = ?";
 
-		System.out.println("busca"+login);
 		try {
 			PreparedStatement p = this.conexao.prepareStatement(comando);
 			
@@ -170,7 +166,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 		String comando = "SELECT * FROM usuarios WHERE login = ?";
 
 		Usuario usuario = new Usuario();
-		System.out.println("busca"+login);
 		try {
 			PreparedStatement p = this.conexao.prepareStatement(comando);
 			
@@ -231,8 +226,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			PreparedStatement p2 = this.conexao.prepareStatement(comando2);
 
 			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
-			// System.out.println("Texto deserializado: "+textodeserializado);
-
 			String senmd5 = "";
 
 			MessageDigest md = null;
@@ -246,7 +239,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
 
 			senmd5 = hash.toString(16);
-			// System.out.println(senmd5);
 			usuario.setSenha(senmd5);
 
 			p2.setInt(1, usuario.getNivel_usuario());
@@ -262,7 +254,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 			} else {
 				p2.setString(7, usuario.getLogin());
 			}
-			System.out.println(p2);
 			p2.executeUpdate();
 			
 			return "Usuário alterado com sucesso!";
@@ -279,7 +270,6 @@ public class JDBCUsuarioDAO implements UsuarioDAO {
 	public boolean validaExistencia(String login) {
 
 		String comando = "SELECT login FROM usuarios WHERE login = '"+login+ "' ";
-		System.out.println(comando);
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);

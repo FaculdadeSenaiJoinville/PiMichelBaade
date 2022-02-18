@@ -100,7 +100,6 @@ public class ProdutoRest extends UtilRest {
 				listaProdutos = jdbcProduto.buscarParaVenda(categoria);
 				conec.fecharConexao();
 				String json = new Gson().toJson(listaProdutos);
-				System.out.println(json);
 				return this.buildResponse(json);
 			} catch (Exception e) {
 				e.printStackTrace();

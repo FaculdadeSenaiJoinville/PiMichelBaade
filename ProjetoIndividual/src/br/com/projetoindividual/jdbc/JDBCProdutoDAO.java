@@ -34,17 +34,13 @@ public class JDBCProdutoDAO implements ProdutoDAO {
 				return "Já existe um produto com esse nome na mesma categoria.";
 			}
 		
-			System.out.println("valor: "+produto.getIsValorUnidade());
 			String comando2 = "INSERT INTO produtos (nome, valor, isvalorunidade, categorias_id) VALUES (?,?,?,?)";
-			System.out.println("query:"+comando2);
 			PreparedStatement p2 = this.conexao.prepareStatement(comando2);
 
 			p2.setString(1, produto.getNome());
 			p2.setFloat(2, produto.getValor());
 			p2.setInt(3, produto.getIsValorUnidade());
 			p2.setInt(4, produto.getCategoriaId());
-			
-			System.out.println("query final: "+p2);
 			p2.execute();
 			return "Produto alterado com sucesso!";
 
@@ -194,7 +190,6 @@ public List<Produto> buscar() {
 
 		String comando = "SELECT id FROM produtos WHERE nome ='" + produto.getNome() + "' && categorias_id = " + produto.getCategoriaId() + " && id != "
 				+ produto.getId() + " ";
-		System.out.println("sql para ver igualdade de produtos: "+comando);
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
@@ -212,7 +207,6 @@ public List<Produto> buscar() {
 			p2.setInt(3, produto.getIsValorUnidade());
 			p2.setInt(4, produto.getCategoriaId());
 			p2.setInt(5, produto.getId());
-			System.out.println("sql da query pronta: "+p2);
 			p2.executeUpdate();
 
 			return "Produto alterado com sucesso!";
@@ -228,7 +222,6 @@ public List<Produto> buscar() {
 	public List<JsonObject> buscarParaVenda(int categoria) {
 		
 		String comando = "SELECT * FROM produtos WHERE  categorias_id = "+categoria+" ORDER BY nome ASC";
-		System.out.println(comando);
 		List<JsonObject> listaProdutos = new ArrayList<JsonObject>();
 		JsonObject produto = null;
 		try {

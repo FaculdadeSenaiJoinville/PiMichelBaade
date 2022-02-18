@@ -48,7 +48,6 @@ public class UsuarioRest extends UtilRest {
 			
 
 			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
-			System.out.println("Texto deserializado: "+textodeserializado);
 			
 			String senmd5 = "";
 			
@@ -63,7 +62,6 @@ public class UsuarioRest extends UtilRest {
 			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
 			
 			senmd5 = hash.toString(16);
-			System.out.println(senmd5);
 			usuario.setSenha(senmd5);
 			
 			

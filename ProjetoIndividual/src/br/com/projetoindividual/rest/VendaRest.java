@@ -61,7 +61,6 @@ public class VendaRest extends UtilRest{
 			Connection conexao = conec.abrirConexao();
 			JDBCVendaDAO jdbcVenda = new JDBCVendaDAO(conexao);
 			String listaValores = jdbcVenda.atualizaValores(prodCortada);
-			//System.out.println("Valor que vai retornar: "+listaValores);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaValores);		
 			

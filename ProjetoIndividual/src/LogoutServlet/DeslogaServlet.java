@@ -18,7 +18,6 @@ private static final long serialVersionUID = 1L;
 			throws ServletException, IOException, NoSuchAlgorithmException {
 
 			HttpSession sessao = request.getSession();
-			System.out.println("logout: "+sessao);
 			sessao.invalidate();
 			response.sendRedirect("/ProjetoIndividual/index.html");	
 	}
