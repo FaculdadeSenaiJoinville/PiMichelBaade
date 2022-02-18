@@ -38,7 +38,7 @@ SONHOS.consultavenda.filtrar = function(){
 
 	            var options = {
 	                title: 'Produtos que mais apareceram em vendas',
-	                colors: ['#db2a2a'],
+	                colors: ['#eeff00'],
 	                backgroundColor: '#66ccff',
 	                is3D: true,
 	                hAxis: {
@@ -90,7 +90,7 @@ SONHOS.consultavenda.filtrar = function(){
 
 	            var options = {
 	                title: 'Produtos mais vendidos por Kg',
-	                colors: ['#33359c'],
+	                colors: ['#db832a'],
 	                backgroundColor: '#66ccff',
 	                is3D: true,
 	                hAxis: {
@@ -142,7 +142,7 @@ SONHOS.consultavenda.filtrar = function(){
 
 	            var options = {
 	                title: 'Produtos mais vendidos por unidade',
-	                colors: ['#00b512'],
+	                colors: ['#db2a2a'],
 	                backgroundColor: '#66ccff',
 	                is3D: true,
 	                hAxis: {
