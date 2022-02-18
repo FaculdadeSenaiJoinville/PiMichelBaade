@@ -1,0 +1,32 @@
+<script src="/ProjetoIndividual/js/relatoriofaturamento.js"></script>
+<section class="secInserir" id="sectionfaturamento">
+
+	<h2>Relatório de Faturamento</h2>
+
+	<form name="frmFiltraFaturamento" id="filtraFaturamento" class="frmFiltrar">
+		<fieldset>
+			<legend>Filtrar</legend>
+			<table>
+
+				<tr>
+					<th>Data Inicial</th>
+					<th>Data Final</th>
+					<th></th>
+				</tr>
+	
+				<tr>
+				
+					<td><input type="date" name="datainicio" id="datainicio" ></td>
+					<td><input type="date" name="datafinal" id="datafinal" ></td>
+					
+					<td><button type="button" onclick="SONHOS.relatoriofaturamento.filtrar()">Filtrar</button></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+	
+	
+	
+	<div id="relatorioFaturamento" class="listaRegistros"></div>
+	
+</section>

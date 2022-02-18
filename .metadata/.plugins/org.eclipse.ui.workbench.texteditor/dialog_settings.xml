@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="#addCategoria"/>
+		<item key="selection" value="aparicao"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="#addCategoria"/>
-			<item value="frminserir"/>
-			<item value="usuario"/>
-			<item value="buscarPorLogin"/>
-			<item value="buscarUsuario"/>
-			<item value="exibirAviso"/>
-			<item value="modal"/>
-			<item value="id"/>
-			<item value="funcionario"/>
-			<item value="Funcionario"/>
-			<item value="categoria"/>
-			<item value="Categoria"/>
-			<item value="add"/>
-			<item value="input"/>
-			<item value="td"/>
+			<item value="aparicao"/>
+			<item value="chart_div"/>
+			<item value="produtoAntigo"/>
+			<item value="listaDeFaturamentos"/>
+			<item value="timeofday"/>
+			<item value="frmFiltraFaturamento"/>
+			<item value="relatoriofaturamento"/>
+			<item value="consultavenda"/>
+			<item value="listaRegistro"/>
+			<item value="total do"/>
+			<item value="per"/>
+			<item value="package br.com.projetoindividual.rest;"/>
+			<item value="buscar"/>
+			<item value="valida"/>
+			<item value="System.out.pri"/>
 		</list>
 		<list key="replacehistory">
+			<item value="quantidadeTotal"/>
+			<item value="frmFiltraConsultaVenda"/>
+			<item value="consultavenda"/>
 			<item value="usuario"/>
 			<item value="Usuario"/>
 			<item value="funcionario"/>
@@ -32,8 +35,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1015"/>
-		<item key="DIALOG_Y_ORIGIN" value="193"/>
+		<item key="DIALOG_X_ORIGIN" value="8"/>
+		<item key="DIALOG_Y_ORIGIN" value="176"/>
 		<item key="DIALOG_WIDTH" value="284"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>

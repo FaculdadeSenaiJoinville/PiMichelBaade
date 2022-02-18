@@ -37,4 +37,10 @@ $(document).ready(function() {
 		$("#modalAviso").dialog(modal);
 	};
 	
+	
+	
 });
+
+SONHOS.formatarDinheiro = function(valor){
+	return valor.toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");	
+}

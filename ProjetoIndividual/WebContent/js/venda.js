@@ -10,16 +10,13 @@ $(document).ready(function() {
 	categoriaAntigo = new Array();
 	categoriaAntigo[0] = "";
 	
-	valorProdutoAntigo = new Array();
-	valorProdutoAntigo[0] = "";
-	
 	QuantidadePesoAntigo = new Array();
 	QuantidadePesoAntigo[0] = "";
 	
 	valorAntigo = new Array();
 	valorAntigo[0] = "";
 		
-	var valorTotalAntigo = "";
+	var valorTotalAntigo = parseInt(0);
 	
 	SONHOS.venda.guardaValores = function(id){
 		
@@ -27,24 +24,16 @@ $(document).ready(function() {
 		var categoriaAtual = document.getElementsByName('selCategoria[]');
 		var QuantidadePesoAtual = document.getElementsByName('QuantidadePeso[]');
 		var valorAtual = document.getElementsByName('valor[]');
-		var valorProdutoAtual = document.getElementsByName('ValorProduto[]');
-		
-		
-		
+			
 		for (var i = 0; i < $("tr.detalhes").length; i++) {
 			produtoAntigo[i] = produtoAtual[i].value;
 			categoriaAntigo[i] = categoriaAtual[i].value;
 			QuantidadePesoAntigo[i] = QuantidadePesoAtual[i].value;
 			valorAntigo[i] = valorAtual[i].value;
 			
-			valorProdutoAntigo[i] = valorProdutoAtual[i].value;
+		}	
+		$("#totalValores").html("Total: R$ "+valorTotalAntigo);
 		
-			//console.log("GuardaValores: \n");		
-			//console.log("Produtos: \n"+produtoAntigo[i]);
-			//console.log("Categorias: \n"+categoriaAntigo[i]);
-			//console.log("Quantidade/Peso: \n"+QuantidadePesoAntigo[i]);
-			//console.log("Valor total da linha: \n"+valorAntigo[i]);		
-		}		
 	}
 
 
@@ -113,32 +102,25 @@ $(document).ready(function() {
 		//ao setar os novos campos do clone ele não deixa alterar mais por javascript.
 		novoCampo.find("input").val(0);
 		novoCampo.insertAfter("tr.detalhes:last");
-		
-		//SONHOS.venda.AtualizaValor();
-		
 		SONHOS.venda.guardaValores();
 		
-	});
-	
+	});	
 	
 	SONHOS.venda.removeCampo = function(botao) {
 		
 		if($("tr.detalhes").length > 1){
 			
 			$(botao).parent().parent().remove();
-			
 			SONHOS.venda.guardaValores();
 			SONHOS.venda.AtualizaValor();			
 		}else{
 			SONHOS.exibirAviso("A última linha não pode ser removida!");
 		}
-	// fecha função removeCampo	
 	}
 	
 	
 	SONHOS.venda.carregarProdutos = function(botao) {
 		
-		var valorProduto = document.getElementsByName('ValorProduto[]');
 		var selectProduto = document.getElementsByName('selProduto[]');
 		var categoriaAtual =  document.getElementsByName('selCategoria[]');
 		
@@ -167,29 +149,20 @@ $(document).ready(function() {
 			success: function (produtos) {
 				
 				produtos = JSON.parse(produtos);
-				console.log("produtos valor: "+produtos);
 				$(selectProduto[linhaAlterada]).html("");
 				
 				if (produtos.length) {
-					console.log("quantidade de produtossssssss: "+produtos.length);
 					$(selectProduto[linhaAlterada]).removeClass("aviso");
 					
 					var option = document.createElement("option");
 					option.setAttribute("value","");
 					option.innerHTML = ("Escolha");
 					$(selectProduto[linhaAlterada]).append(option);
-					//console.log("quantidade de produtos"+produtos.length);
 					for (var i = 0; i < produtos.length; i++) {
 						var option = document.createElement("option");
 						option.setAttribute("value",produtos[i].id);
 						option.innerHTML = (produtos[i].nome);
 						$(selectProduto[linhaAlterada]).append(option);
-						valorProduto[i] = produtos[i].valor;
-						//valorProduto[i].value = produtos[i].valor;
-						//valores[i].value = produtos[i].valor;
-						//valorProduto[i-1].value = produtos[i].valor;
-						
-						console.log("Valor do produto ["+i+"] "+produtos[i].valor);
 					}
 				}else{
 					
@@ -218,18 +191,12 @@ $(document).ready(function() {
 			}
 		});
 		
-		SONHOS.venda.guardaValores();
-		
-		//console.log("Produtos: \n"+produtoAntigo);
-		//console.log("Categorias: \n"+categoriaAntigo);
-		//console.log("Quantidade/Peso: \n"+QuantidadePesoAntigo);
-		//console.log("Valor do Produto: \n"+valorProdutoAntigo);
-		//console.log("Valor total da linha: \n"+valorAntigo);
-			
+		SONHOS.venda.guardaValores();	
 	}
 	
 	SONHOS.venda.validaDetalhe = function() {
 	
+	var categoriasValidar = document.getElementsByName('selCategoria[]');
 	var produtosValidar = document.getElementsByName('selProduto[]');
 	
 	var qtdeValidar = document.getElementsByName('QuantidadePeso[]');
@@ -238,7 +205,11 @@ $(document).ready(function() {
 	for (var i = 0; i < produtosValidar.length; i++) {
 		
 		var linha = i+1;
-		if ((produtosValidar[i].value=="")||(qtdeValidar[i].value=="")||(valorValidar[i].value=="")) {
+		if((qtdeValidar[i].value<="0")){
+			SONHOS.exibirAviso("Não é permitido inserir um produto com quantidade negativa(linha "+linha+").");
+			return false;
+		}
+		if ((produtosValidar[i].value=="")||(categoriasValidar[i].value=="")||(qtdeValidar[i].value=="")||(valorValidar[i].value=="")) {
 			
 			SONHOS.exibirAviso("A linha "+linha+" não foi completamente preenchida.");
 			return false;
@@ -273,77 +244,69 @@ $(document).ready(function() {
 				type: "POST",
 				url: SONHOS.PATH + "venda/inserir",
 				data: JSON.stringify(venda),
+				async:false,
 				success: function (msg) {
-					
+					console.log(msg);
+					if(msg.includes('Venda realizada com sucesso!')){
+						SONHOS.carregaPagina('venda');
+					}
 					SONHOS.exibirAviso(msg);
-				
 				},
 				error: function (info) {
 				
 					SONHOS.exibirAviso("Erro ao cadastrar um novo produto: "+info.status+" - "+info.statusText);
 				}
 			});
+			
 		}
-		SONHOS.carregaPagina("venda");
+		
 	}
 	
 	
 SONHOS.venda.AtualizaValor = function() {
 		
+	var linhaAlterada = "0";
+	
+	var selectProduto = document.getElementsByName('selProduto[]');
+	
+	for (var j = 0; j < selectProduto.length; j++) {
+		
+		if ((produtoAntigo[j] != selectProduto[j].value)) {
+			linhaAlterada = j;
+		}
+		
+	}
+	
+	var QuantidadePesoAtual = document.getElementsByName('QuantidadePeso[]');
+	
+	for (var j = 0; j < QuantidadePesoAtual.length; j++) {
+		
+		if ((QuantidadePesoAntigo[j] != QuantidadePesoAtual[j].value)) {
+			linhaAlterada = j;
+		}
+		
+	}
 		$.ajax({
 			type: "POST",
 			url: SONHOS.PATH + "venda/atualizaValores",
-			data:"produtoAntigo="+produtoAntigo,
+			data:"produtoAntigo="+selectProduto[linhaAlterada].value,
 			async:false,
 			success: function (valoresProdutos) {
 				
 				valoresProdutos = JSON.parse(valoresProdutos);
-				//console.log(valoresProdutos);
 				
 				var venda = new Object();
 				var quantidades = document.getElementsByName('QuantidadePeso[]');
 				var valores = document.getElementsByName('valor[]');
 				var idprodutos = document.getElementsByName('selProduto[]');
+				
 				venda.produtos = new Array(valoresProdutos.length);
-				//console.log(valoresProdutos.length);
-				var totalValores = 0;
+				valores[linhaAlterada].value = (valoresProdutos * quantidades[linhaAlterada].value);
 				
-				//console.log("Quantidade que ta no valores guardado: "+QuantidadePesoAntigo[0]);
-				//console.log("Quantidade que ta vindo para o atualiza: "+quantidades[0].value);
-				
-				
-				for (var j = 0; j < $("tr.detalhes").length; j++) {
-					//console.log("Id do produto antigo: "+produtoAntigo[j]);
-					//console.log("Id do produto novo: "+idprodutos[j].value);
-					console.log("valor atual da linha "+j+": "+valorAntigo[j]);
-					if ((produtoAntigo[j] != idprodutos[j].value)) {
-						console.log("Quantidade que ta no valores guardado: "+QuantidadePesoAntigo[j]);
-						console.log("Quantidade que ta vindo para o atualiza: "+quantidades[j].value);
-						
-						linhaAlterada = j;
-						console.log("linhaAlterada: "+linhaAlterada);
-						
-
-						//totalValores -= (valorAtual[j] * QuantidadePesoAntigo[j]);
-						
-						//totalValores += (valoresProdutos[j].valor * quantidades[j].value);
-					}
-					
-					
-					
+				valorTotalAntigo = parseInt(0);
+				for (var i = 0; i < valores.length; i++) {					
+					valorTotalAntigo = parseInt(valorTotalAntigo) + parseInt(valores[i].value); 
 				}
-				
-				for (var i = 0; i < $("tr.detalhes").length; i++) {
-					venda.produtos[i] = new Object();
-					venda.produtos[i].valor = valoresProdutos[i].valor;
-					valores[i].value = (valoresProdutos[i].valor * quantidades[i].value);
-					
-					totalValores += (valoresProdutos[i].valor * quantidades[i].value);
-				}
-				valorTotalAntigo = totalValores;
-				console.log("totalValores: "+totalValores);
-				console.log("valortotalAntigo: "+valorTotalAntigo);
-				$("#totalValores").html("Total: R$ "+valorTotalAntigo);
 				SONHOS.venda.guardaValores();
 			},
 			error: function (info) {
@@ -360,12 +323,6 @@ SONHOS.venda.AtualizaValor = function() {
 		});
 		
 		SONHOS.venda.guardaValores();
-		
-		//console.log("Produtos: \n"+produtoAntigo);
-		//console.log("Categorias: \n"+categoriaAntigo);
-		//console.log("Quantidade/Peso: \n"+QuantidadePesoAntigo);
-		//console.log("Valor do Produto: \n"+valorProdutoAntigo);
-		//console.log("Valor total da linha: \n"+valorAntigo);	
 	}
 	
 });

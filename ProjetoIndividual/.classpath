@@ -9,8 +9,19 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/activation-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/commons-email-1.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/mailjar/mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/javamail-1.4.5/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/javamail-1.4.5/mail.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/iText7-Core-7.1.3.zip"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/pdf/pdfa-7.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/pdf/kernel-7.1.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.google.gson.JsonObject;
-
 import br.com.projetoindividual.jdbcinterface.VendaDAO;
 import br.com.projetoindividual.modelo.ProdutoVenda;
 import br.com.projetoindividual.modelo.Venda;
@@ -31,28 +29,23 @@ public class JDBCVendaDAO implements VendaDAO {
 			String comando = "INSERT INTO vendas (data_venda,usuarios_login) VALUES (?,?)";
 
 			String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-		    //System.out.println("dia: "+timeStamp);
-			
+		   
 			PreparedStatement p = this.conexao.prepareStatement(comando, PreparedStatement.RETURN_GENERATED_KEYS);
-			//p.setInt(1, venda.getId());
-			//System.out.println("id da Venda: "+venda.getId());
 			p.setString(1, timeStamp);
-			//System.out.println("data da Venda: "+timeStamp);
 			p.setString(2, venda.getLogin());
-			//System.out.println("login da Venda: "+venda.getLogin());
-			System.out.println(comando);
+			//System.out.println(comando);
 			
 			List<Integer> idsProdutos = new ArrayList<Integer>();
 			
-			for (ProdutoVenda produto : venda.getProdutos()) {
-
-				if (idsProdutos.contains(produto.getIdProduto())) {
-					return "Não é permitido inserir mais de uma vez o mesmo produto na mesma venda!";
-				}else {
-					idsProdutos.add(produto.getIdProduto());
-				}
+			//for (ProdutoVenda produto : venda.getProdutos()) {
+				//if (idsProdutos.contains(produto.getIdProduto())) {
+				//	return "Não é permitido inserir mais de uma vez o mesmo produto na mesma venda!";
+				//}else {
+					//idsProdutos.add(produto.getIdProduto());
+				//}
 				
-			}
+			//}
+			
 			p.execute();
 			ResultSet idGerado = p.getGeneratedKeys();
 			
@@ -78,38 +71,33 @@ public class JDBCVendaDAO implements VendaDAO {
 	}
 	
 	
-	public List<JsonObject> atualizaValores(String[] idProdutos) {
-		
-		List<JsonObject> listaValores = new ArrayList<JsonObject>();
-		JsonObject valor;
-		//System.out.println("id dos produtos: "+idProdutos);
-		//float valores[] = new float[idProdutos.length];
+	public String atualizaValores(String idProduto) {
+		if (idProduto.equals("Aguarde")) {
+			return "0";
+		}
+		String valor = "0";
 		try {
 			
-			for (int i = 0; i < idProdutos.length; i++) {
-				
-				String comando = "SELECT valor FROM produtos WHERE id = "+idProdutos[i];
-				System.out.println(comando);
+		
+				String comando = "SELECT valor FROM produtos WHERE id = "+idProduto;
+				//System.out.println(comando);
 				Statement stmt = conexao.createStatement();
 				
 				ResultSet rs = stmt.executeQuery(comando);
-				valor = new JsonObject();
 				if (rs.next()) {
+					valor = rs.getString("valor");
 					
-
-					valor.addProperty("valor", rs.getFloat("valor"));
 				}
 				
-				
-				listaValores.add(valor);
-				
-			}
-		
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return "0";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "0";
 		}
 		
-		return listaValores;
+		return valor;
 	}
 
 }

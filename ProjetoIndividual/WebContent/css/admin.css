@@ -313,4 +313,60 @@ td a{
 .tituloAlterar{
 	padding-top: 75px;
 }
+div #relatorioFaturamento {
+	display: inline;
+}
 
+div #imgPdf{
+	display: inline-flex;
+}
+
+
+.imagemPDF{
+	
+	vertical-align: bottom;
+    bottom: 100;
+    z-index: 100;
+    position: relative;
+    top: 65%;
+	/*
+	margin-top: 100%;
+    margin-bottom: 0%;
+    padding-top: 100%;
+	*/
+    
+}
+#tablePdf th{
+	width: 200px;
+}
+
+.listaRegistrosRelatorio tr, .listaRegistrosRelatorio td, .listaRegistrosRelatorio th{
+	border: 1px solid #000;
+	padding: 0px 5px;
+}
+.listaRegistrosRelatorio table th {
+	text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    padding: 0 5px;
+    border: black;
+}
+#rodapeRelatorio{
+	font-weight: bold;
+	background-color: dodgerblue;
+}
+
+#chartProdutosMaisVendidos{
+	width: 33%;
+}
+#chartProdutosMaisVendidosKg{
+	width: 33%;
+}
+#chartProdutosMaisVendidosUnidade{
+	width: 33%;
+}
+.graficos{
+	display: flex;
+	background-color: #66ccff;
+}

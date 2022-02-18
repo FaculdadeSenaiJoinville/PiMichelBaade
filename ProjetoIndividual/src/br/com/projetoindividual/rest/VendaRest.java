@@ -1,8 +1,6 @@
 package br.com.projetoindividual.rest;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import br.com.projetoindividual.bd.Conexao;
 import br.com.projetoindividual.jdbc.JDBCVendaDAO;
@@ -53,22 +50,18 @@ public class VendaRest extends UtilRest{
 	@Path("/atualizaValores")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response atualizaValores(String produtoAntigo) {
+	public Response atualizaValores(String idProduto) {
 
-		System.out.println("normal: "+produtoAntigo);
-		List<JsonObject> listaValores = new ArrayList<JsonObject>();
-		String prodCortada = produtoAntigo.substring(14);
-		
-		System.out.println("cortada: "+prodCortada);
-		String [] idProdutos = prodCortada.split("\\s*,\\s*");
+		String prodCortada = idProduto.substring(14);
+	
 		try {
 			
 			
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCVendaDAO jdbcVenda = new JDBCVendaDAO(conexao);
-			listaValores = jdbcVenda.atualizaValores(idProdutos);
-			System.out.println(listaValores);
+			String listaValores = jdbcVenda.atualizaValores(prodCortada);
+			//System.out.println("Valor que vai retornar: "+listaValores);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaValores);		
 			
