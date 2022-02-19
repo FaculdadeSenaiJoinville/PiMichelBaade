@@ -30,7 +30,7 @@ SONHOS.consultavenda.filtrar = function(){
 
 	            var data = new google.visualization.DataTable();
 	            data.addColumn('string', 'Produtos que mais apareceram em vendas');
-	            data.addColumn('number', 'Quantidade de vendas');
+	            data.addColumn('number', 'Aparição nas vendas');
 
 	            for (var i = 0; i < dados.length; i++) {
 	                data.addRow([dados[i].nome, dados[i].produtosAparicao]);
@@ -45,7 +45,7 @@ SONHOS.consultavenda.filtrar = function(){
 	                    title: 'Produtos'
 	                },
 	                vAxis: {
-	                    title: 'Quantidade'
+	                    title: 'Aparição'
 	                }
 	            };
 
