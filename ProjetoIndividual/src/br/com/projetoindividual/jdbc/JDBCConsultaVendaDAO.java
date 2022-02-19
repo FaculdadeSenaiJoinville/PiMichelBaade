@@ -21,7 +21,7 @@ public class JDBCConsultaVendaDAO implements ConsultaVendaDAO {
 	public List<JsonObject> produtosMaisVendidos(String dataInicio, String dataFinal) {
 		List<JsonObject> listaConsultaVenda = new ArrayList<JsonObject>();
 		JsonObject aparicao;
-		String comando = "SELECT SUM(vendas_has_produtos.produtos_id) as produtosAparicao, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE CAST(data_venda AS DATE) >= '"
+		String comando = "SELECT COUNT(vendas_has_produtos.produtos_id) as produtosAparicao, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE CAST(data_venda AS DATE) >= '"
 				+ dataInicio + "' AND CAST(data_venda AS DATE) <= '" + dataFinal
 				+ "' GROUP BY vendas_has_produtos.produtos_id LIMIT 5";
 		try {
