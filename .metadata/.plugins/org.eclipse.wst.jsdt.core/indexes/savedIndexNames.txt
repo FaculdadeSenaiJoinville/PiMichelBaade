@@ -1,7 +1,2 @@
-INDEX VERSION 1.4+C:\Users\SENAI\Downloads\michel\PiMichelBaade\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1124148495.index
-2354839441.index
+INDEX VERSION 1.4+C:\Users\SENAI\Downloads\PiMichelBaade\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 1773733257.index
-1122494145.index
-1239753300.index
-3054320104.index

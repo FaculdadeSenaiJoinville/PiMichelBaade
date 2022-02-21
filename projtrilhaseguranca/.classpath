@@ -8,8 +8,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/PiMichelBaade/projtrilhaseguranca/WebContent/WEB-INF/lib/jakarta.servlet-api-4.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/PiMichelBaade/projtrilhaseguranca/WebContent/WEB-INF/lib/jakarta.ws.rs-api-2.1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/SENAI/Desktop/faculdade/PiMichelBaade/projtrilhaseguranca/WebContent/WEB-INF/lib/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Downloads/PiMichelBaade/ProjetoIndividual/WebContent/WEB-INF/lib/jakarta.servlet-api-4.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Downloads/PiMichelBaade/ProjetoIndividual/WebContent/WEB-INF/lib/jakarta.ws.rs-api-2.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SENAI/Downloads/PiMichelBaade/ProjetoIndividual/WebContent/WEB-INF/lib/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

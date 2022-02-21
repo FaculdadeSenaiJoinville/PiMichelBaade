@@ -44,7 +44,7 @@ public class JDBCConsultaVendaDAO implements ConsultaVendaDAO {
 	public List<JsonObject> produtosMaisVendidosKg(String dataInicio, String dataFinal) {
 		List<JsonObject> listaConsultaVenda = new ArrayList<JsonObject>();
 		JsonObject quantidadeTotal;
-		String comando = "SELECT SUM(vendas_has_produtos.quantidade) as quantidade, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE produtos.isvalorunidade = 1 AND CAST(data_venda AS DATE) >= '"
+		String comando = "SELECT SUM(vendas_has_produtos.quantidade) as quantidade, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE produtos.isvalorunidade = 2 AND CAST(data_venda AS DATE) >= '"
 				+ dataInicio + "' AND CAST(data_venda AS DATE) <= '" + dataFinal
 				+ "' GROUP BY vendas_has_produtos.produtos_id LIMIT 5";
 		try {
@@ -67,7 +67,7 @@ public class JDBCConsultaVendaDAO implements ConsultaVendaDAO {
 	public List<JsonObject> produtosMaisVendidosUnidade(String dataInicio, String dataFinal) {
 		List<JsonObject> listaConsultaVenda = new ArrayList<JsonObject>();
 		JsonObject quantidadeTotal;
-		String comando = "SELECT SUM(vendas_has_produtos.quantidade) as quantidade, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE produtos.isvalorunidade = 2 AND CAST(data_venda AS DATE) >= '"
+		String comando = "SELECT SUM(vendas_has_produtos.quantidade) as quantidade, produtos.nome  FROM vendas INNER JOIN vendas_has_produtos ON vendas.id = vendas_has_produtos.vendas_id INNER JOIN produtos ON vendas_has_produtos.produtos_id= produtos.id WHERE produtos.isvalorunidade = 1 AND CAST(data_venda AS DATE) >= '"
 				+ dataInicio + "' AND CAST(data_venda AS DATE) <= '" + dataFinal
 				+ "' GROUP BY vendas_has_produtos.produtos_id LIMIT 5";
 		try {
