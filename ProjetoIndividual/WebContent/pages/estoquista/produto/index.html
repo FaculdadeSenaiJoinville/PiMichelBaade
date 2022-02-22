@@ -1,108 +1,104 @@
 <script src="/ProjetoIndividual/js/produto.js"></script>
 <section class="secInserir">
 
-		<h2>Registro de Produto</h2>
+	<h2>Registro de Produto</h2>
 
-		<form name="frmAddProduto" id="addProduto" class="frmInserir">
-			<fieldset>
-				<legend>Novo Produto</legend>
-				<table id="tableProduto">
+	<form name="frmAddProduto" id="addProduto" class="frmInserir">
+		<fieldset>
+			<legend>Novo Produto</legend>
+			<table id="tableProduto">
 
-					<tr>
-						<th>Categoria</th>
-						<td> 
-						<select name="categoriaId" id="selCategoria">
-						<option value="" class="buscando">Aguarde, buscando categorias...</option>
-						</select>
-						</td>
-						
-					</tr>
-					<tr>
-						<th>Nome do Produto</th>
-						<td><input type="text" name="nome"></td>
+				<tr>
+					<th>Categoria</th>
+					<td><select name="categoriaId" id="selCategoria">
+							<option value="" class="buscando">Aguarde, buscando
+								categorias...</option>
+					</select></td>
 
-						<th>Tipo</th>
-						<td>
-						<input type="radio" name="isvalorunidade" value="1" id="tipoid" checked>					
-						<label for="tipoQ">Quantidade </label>
-						<input type="radio" name="isvalorunidade" value="2" id="tipoid2"> 
-						<label for="tipoP">Peso </label>
-										
-						</td>
-						
-						<th>Valor Por Unidade/Kg</th>
-						<td><input type="text" name="valor"></td>
+					<th>Nome do Produto</th>
+					<td><input type="text" name="nome"></td>
 
-					</tr>
-					<tr id="botoesInserir">
-						<td colspan="8">
-							<button type="reset">Limpar</button>
-							<button type="button" onclick="SONHOS.produto.cadastrar()">Cadastrar</button>
-						</td>
-					</tr>
-				</table>
-			</fieldset>
+				</tr>
+				<tr>
+					<th>Tipo</th>
+					<td><input type="radio" name="isvalorunidade" value="1"
+						id="tipoid" checked> <label for="tipoQ">Quantidade
+					</label> <input type="radio" name="isvalorunidade" value="2" id="tipoid2">
+						<label for="tipoP">Peso </label></td>
+
+					<th>Preço Por Unidade/Kg</th>
+					<td><input type="text" name="valor"></td>
+
+				</tr>
+				<tr id="botoesInserir">
+					<td colspan="8">
+						<button type="reset">Limpar</button>
+						<button type="button" onclick="SONHOS.produto.cadastrar()">Cadastrar</button>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
+
+	<h3>Produtos Registrados</h3>
+
+	<form id="filtraProduto" class="frmFiltrar">
+
+		<fieldset>
+			<legend>Filtrar</legend>
+
+			<input type="text" name="txtbusca" id="campoBuscaProduto"
+				placeholder="Nome do Produto">
+			<button type="button" onclick="SONHOS.produto.buscar()">Buscar</button>
+
+		</fieldset>
+
+	</form>
+
+	<div id="listaProdutos" class="listaRegistros"></div>
+
+
+	<div id="modalEditaProduto" class="modalEditar">
+		<form name="frmEditaProduto" id="editaProduto" class="frmEditar">
+			<table>
+
+				<tr>
+					<th>Categoria</th>
+					<td><select name="categoriaId" id="selCategoriaEdicao">
+							<option value="" class="buscando">Aguarde, buscando
+								categorias...</option>
+					</select></td>
+
+					<th>Nome do Produto</th>
+					<td><input type="text" name="nome"></td>
+
+				</tr>
+				
+				<tr>
+					<th>Tipo</th>
+					<td><input type="radio" name="isvalorunidade" value="1"
+						id="tipoid"> <label for="tipoQ">Quantidade </label> <input
+						type="radio" name="isvalorunidade" value="2" id="tipoid2">
+						<label for="tipoP">Peso </label></td>
+					<th>Preço Por Unidade/Kg</th>
+					<td><input type="text" name="valor"></td>
+
+				</tr>
+			</table>
+			<input type="hidden" name="idProduto">
 		</form>
+	</div>
 
-		<h3>Produtos Registrados</h3>
-
-		<form id="filtraProduto" class="frmFiltrar">
-
-			<fieldset>
-				<legend>Filtrar</legend>
-
-				<input type="text" name="txtbusca" id="campoBuscaProduto"
-					placeholder="Nome do Produto">
-				<button type="button" onclick="SONHOS.produto.buscar()">Buscar</button>
-
-			</fieldset>
-
+	<div id="modalExcluiProduto" class="modalEditar">
+		<form name="frmExcluiProduto" id="editaProduto" class="frmEditar">
+			<input type="hidden" name="idProduto">
+			<table>
+				<tr>
+					<th>Tem certeza que deseja excluir esse produto?</th>
+				</tr>
+			</table>
 		</form>
+	</div>
 
-		<div id="listaProdutos" class="listaRegistros"></div>
 
-
-		<div id="modalEditaProduto" class="modalEditar">
-			<form name="frmEditaProduto" id="editaProduto" class="frmEditar">
-				<table>
-
-					<tr>
-						<th>Categoria</th>
-						<td><select name="categoriaId" id="selCategoriaEdicao">
-								<option value="" class="buscando">Aguarde, buscando
-									categorias...</option>
-						</select>
-						</td>
-
-					</tr>
-					<tr>
-						<th>Nome do Produto</th>
-						<td><input type="text" name="nome"></td>
-
-						<th>Tipo</th>
-						<td><input type="radio" name="isvalorunidade" value="1" id="tipoid">
-							<label for="tipoQ">Quantidade </label>
-							<input type="radio" name="isvalorunidade" value="2" id="tipoid2">
-							<label for="tipoP">Peso </label></td>
-						<th>Valor Por Unidade/Kg</th>
-						<td><input type="text" name="valor"></td>
-
-					</tr>
-				</table>
-				<input type="hidden" name="idProduto">
-			</form>
-		</div>
-		
-		<div id="modalExcluiProduto" class="modalEditar">
-			<form name="frmExcluiProduto" id="editaProduto" class="frmEditar">
-				<input type="hidden" name="idProduto">
-				<table>
-					<tr>
-						<th>Tem certeza que deseja excluir esse produto?</th>
-					</tr>
-				</table>
-			</form>
-		</div>
-
-		
 </section>
