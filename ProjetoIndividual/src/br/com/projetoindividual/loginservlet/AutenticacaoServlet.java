@@ -26,7 +26,6 @@ public class AutenticacaoServlet extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, NoSuchAlgorithmException {
 		Usuario usuario = new Usuario();
-		
 		usuario.setLogin(request.getParameter("usuario"));
 		String textodeserializado = new String(Base64.getUrlDecoder().decode(request.getParameter("senha")));
 		

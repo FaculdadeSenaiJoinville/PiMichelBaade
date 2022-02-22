@@ -20,10 +20,8 @@ public class ServletFilter implements Filter {
 		String context = request.getServletContext().getContextPath();
 		try {
 
-			HttpSession session = ((HttpServletRequest) request).getSession();
-			
-			
-			
+			HttpSession session = ((HttpServletRequest) request).getSession();	
+			((HttpServletResponse) response).setHeader("cache-control", "no-cache");
 			String usuario = null;
 			
 			int nivel = 0;			
@@ -35,7 +33,6 @@ public class ServletFilter implements Filter {
 					requestURI = ((HttpServletRequest) request).getRequestURI();
 						
 			}
-			
 			if (usuario == null && nivel == 0){
 
 				((HttpServletResponse) response).sendRedirect("http://localhost:8080/ProjetoIndividual/index.html");
@@ -48,9 +45,7 @@ public class ServletFilter implements Filter {
 				}else if (requestURI.startsWith("/ProjetoIndividual/pages/estoquista/") && nivel != 3) {
 					((HttpServletResponse) response).sendRedirect("http://localhost:8080/ProjetoIndividual/index.html");
 				}
-				
 				filterChain.doFilter(request, response);  
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
