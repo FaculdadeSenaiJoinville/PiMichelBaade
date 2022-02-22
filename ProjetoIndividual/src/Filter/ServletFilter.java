@@ -15,29 +15,20 @@ public class ServletFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
-		
-		
-		String context = request.getServletContext().getContextPath();
 		try {
-
 			HttpSession session = ((HttpServletRequest) request).getSession();	
 			((HttpServletResponse) response).setHeader("cache-control", "no-cache");
 			String usuario = null;
-			
 			int nivel = 0;			
-			// Se existe uma Session
 			String requestURI = null;
 			if (session != null && session.getAttribute("nivel_usuario") != null) {
 					usuario = (String) session.getAttribute("login");
 					nivel = (int) session.getAttribute("nivel_usuario");
-					requestURI = ((HttpServletRequest) request).getRequestURI();
-						
+					requestURI = ((HttpServletRequest) request).getRequestURI();		
 			}
 			if (usuario == null && nivel == 0){
-
 				((HttpServletResponse) response).sendRedirect("http://localhost:8080/ProjetoIndividual/index.html");
 			} else {
-				
 				if (requestURI.startsWith("/ProjetoIndividual/pages/admin/") && nivel != 1) {
 					((HttpServletResponse) response).sendRedirect("http://localhost:8080/ProjetoIndividual/index.html");
 				}else if (requestURI.startsWith("/ProjetoIndividual/pages/caixa/") && nivel != 2) {
@@ -51,12 +42,9 @@ public class ServletFilter implements Filter {
 			e.printStackTrace();
 			((HttpServletResponse) response).sendRedirect("http://localhost:8080/ProjetoIndividual/index.html");
 		}
-
 	}
 	
-	// Executa a destruição do Filtro.
 	public void destroy() {
 
 	}
-
 }

@@ -15,11 +15,9 @@ public class JDBCAutenticaDAO implements AutenticaDAO {
 	}
 
 	public int consultar(Usuario usuario) {
-
 		try {
 			String comando = "SELECT * from usuarios WHERE login = '" + usuario.getLogin() + "' and senha = '"
 					+ usuario.getSenha() + "'";
-			
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			if (rs.next()) {
@@ -32,5 +30,4 @@ public class JDBCAutenticaDAO implements AutenticaDAO {
 			return 0;
 		}
 	}
-
 }

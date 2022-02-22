@@ -19,24 +19,20 @@ import br.com.projetoindividual.jdbc.JDBCVendaDAO;
 import br.com.projetoindividual.modelo.Venda;
 
 @Path("venda")
-public class VendaRest extends UtilRest{
+public class VendaRest extends UtilRest {
 
 	@POST
 	@Path("/inserir")
 	@Consumes("application/*")
 	public Response inserir(String vendaParam, @Context HttpServletRequest req) {
-
 		try {
 			Venda venda = new Gson().fromJson(vendaParam, Venda.class);
-			
-			HttpSession sessao = req.getSession();		
+			HttpSession sessao = req.getSession();
 			venda.setLogin((String) sessao.getAttribute("login"));
-			
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCVendaDAO jdbcVenda = new JDBCVendaDAO(conexao);
 			String msg = jdbcVenda.inserir(venda);
-			
 			conec.fecharConexao();
 			return this.buildResponse(msg);
 		} catch (Exception e) {
@@ -44,35 +40,24 @@ public class VendaRest extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-	
-	
+
 	@POST
 	@Path("/atualizaValores")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response atualizaValores(String idProduto) {
-
 		String prodCortada = idProduto.substring(14);
-	
 		try {
-			
-			
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCVendaDAO jdbcVenda = new JDBCVendaDAO(conexao);
 			String listaValores = jdbcVenda.atualizaValores(prodCortada);
 			conec.fecharConexao();
-			String json = new Gson().toJson(listaValores);		
-			
-			return this.buildResponse(json);			
-			
+			String json = new Gson().toJson(listaValores);
+			return this.buildResponse(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-	
-	
-	
-	
 }

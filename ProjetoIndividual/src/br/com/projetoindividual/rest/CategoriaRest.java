@@ -22,7 +22,6 @@ import br.com.projetoindividual.modelo.Categoria;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-
 @Path("categoria")
 public class CategoriaRest extends UtilRest {
 
@@ -30,78 +29,57 @@ public class CategoriaRest extends UtilRest {
 	@Path("/inserir")
 	@Consumes("application/*")
 	public Response inserir(String categoriaParam) {
-
 		try {
 			Categoria categoria = new Gson().fromJson(categoriaParam, Categoria.class);
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
-
 			String retorno = jdbcCategoria.inserir(categoria);
-		
 			conec.fecharConexao();
-
 			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
-	
-	
+
 	@GET
 	@Path("/buscar")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscar() {
-
 		try {
-
 			List<Categoria> listaCategorias = new ArrayList<Categoria>();
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
 			listaCategorias = jdbcCategoria.buscar();
 			conec.fecharConexao();
-			
 			return this.buildResponse(listaCategorias);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
-
 		}
-
 	}
-	
-	
 
 	@GET
 	@Path("/buscarPorNome")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorNome(@QueryParam("valorBusca") String nome) {
-
 		try {
-
 			List<JsonObject> listaCategorias = new ArrayList<JsonObject>();
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
 			listaCategorias = jdbcCategoria.buscarPorNome(nome);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaCategorias);
-
 			return this.buildResponse(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
-
 		}
-
 	}
 
 	@DELETE
@@ -109,23 +87,17 @@ public class CategoriaRest extends UtilRest {
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response excluir(@PathParam("id") int id) {
-
 		try {
-
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
-
 			String retorno = jdbcCategoria.deletar(id);
-		
 			conec.fecharConexao();
 			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
-
 		}
-
 	}
 
 	@GET
@@ -133,7 +105,6 @@ public class CategoriaRest extends UtilRest {
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorId(@QueryParam("id") int id) {
-
 		try {
 			Categoria categoria = new Categoria();
 			Conexao conec = new Conexao();
@@ -146,29 +117,24 @@ public class CategoriaRest extends UtilRest {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
 
 	@PUT
 	@Path("/alterar")
 	@Consumes("application/*")
 	public Response alterar(String categoriaParam) {
-
 		try {
 			Categoria categoria = new Gson().fromJson(categoriaParam, Categoria.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCCategoriaDAO jdbcCategoria = new JDBCCategoriaDAO(conexao);
-
 			String retorno = jdbcCategoria.alterar(categoria);
-
 			conec.fecharConexao();
 			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
+
 }

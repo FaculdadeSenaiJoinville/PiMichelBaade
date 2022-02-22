@@ -21,7 +21,6 @@ public class RedefinirSenhaRest extends UtilRest {
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorEmail(@QueryParam("email") String email) {
-
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
@@ -33,7 +32,6 @@ public class RedefinirSenhaRest extends UtilRest {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
+
 }

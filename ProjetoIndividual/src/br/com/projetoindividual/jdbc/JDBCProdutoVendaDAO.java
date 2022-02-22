@@ -16,17 +16,14 @@ public class JDBCProdutoVendaDAO implements ProdutoVendaDAO {
 	}
 	
 	public String inserir(ProdutoVenda produtoVenda) throws SQLException {
-			
-			String comando = "INSERT INTO vendas_has_produtos (vendas_id,produtos_id,valor,quantidade) VALUES (?,?,?,?)";
-
-			PreparedStatement p = this.conexao.prepareStatement(comando, PreparedStatement.RETURN_GENERATED_KEYS);
-			p.setInt(1, produtoVenda.getIdVenda());
-			p.setInt(2, produtoVenda.getIdProduto());
-			p.setFloat(3, produtoVenda.getValor());
-			p.setFloat(4, produtoVenda.getQuantidade());
-			p.execute();
-			
-			return "Venda realizada com sucesso!";
+		String comando = "INSERT INTO vendas_has_produtos (vendas_id,produtos_id,valor,quantidade) VALUES (?,?,?,?)";
+		PreparedStatement p = this.conexao.prepareStatement(comando, PreparedStatement.RETURN_GENERATED_KEYS);
+		p.setInt(1, produtoVenda.getIdVenda());
+		p.setInt(2, produtoVenda.getIdProduto());
+		p.setFloat(3, produtoVenda.getValor());
+		p.setFloat(4, produtoVenda.getQuantidade());
+		p.execute();
+		return "Venda realizada com sucesso!";
 	}
 	
 }

@@ -5,7 +5,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,36 +36,22 @@ public class UsuarioRest extends UtilRest {
 	@Path("/inserir")
 	@Consumes("application/*")
 	public Response inserir(String usuarioParam) {
-
 		try {
 			Usuario usuario = new Gson().fromJson(usuarioParam, Usuario.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
 			String retorno = jdbcUsuario.inserir(usuario);
-			
-			
-
-			String textodeserializado = new String(Base64.getUrlDecoder().decode(usuario.getSenha()));
-			
 			String senmd5 = "";
-			
 			MessageDigest md = null;
-			
 			try {
 				md = MessageDigest.getInstance("MD5");
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
-			
 			BigInteger hash = new BigInteger(1, md.digest(usuario.getSenha().getBytes()));
-			
 			senmd5 = hash.toString(16);
 			usuario.setSenha(senmd5);
-			
-			
-			
-			
 			conec.fecharConexao();
 			return this.buildResponse(retorno);
 		} catch (Exception e) {
@@ -80,7 +65,6 @@ public class UsuarioRest extends UtilRest {
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorNome(@QueryParam("valorBusca") String nome) {
-
 		try {
 			List<JsonObject> listaUsuarios = new ArrayList<JsonObject>();
 			Conexao conec = new Conexao();
@@ -89,14 +73,11 @@ public class UsuarioRest extends UtilRest {
 			listaUsuarios = jdbcUsuario.buscarPorNome(nome);
 			conec.fecharConexao();
 			String json = new Gson().toJson(listaUsuarios);
-
 			return this.buildResponse(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
-
 		}
-
 	}
 
 	@DELETE
@@ -104,58 +85,47 @@ public class UsuarioRest extends UtilRest {
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response excluir(@PathParam("login") String login) {
-
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
-			String retorno="";
-			if(jdbcUsuario.validaExistencia(login)) {
-			 retorno = jdbcUsuario.deletar(login);
-			}else {
+			String retorno = "";
+			if (jdbcUsuario.validaExistencia(login)) {
+				retorno = jdbcUsuario.deletar(login);
+			} else {
 				new Exception("Ocorreu algum erro ao excluir o funcionário, Por favor recarregue a página");
 			}
-			
 			conec.fecharConexao();
 			return this.buildResponse(retorno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
-	
+
 	@GET
 	@Path("/buscarSenha")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarSenha(@QueryParam("login") String login) {
-
 		try {
-			
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
 			String senha = jdbcUsuario.buscarSenha(login);
-			
-			
 			conec.fecharConexao();
 			return this.buildResponse(senha);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
 
 	@GET
 	@Path("/buscarPorLogin")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorLogin(@QueryParam("login") String login) {
-
 		try {
 			Usuario usuario = new Usuario();
 			Conexao conec = new Conexao();
@@ -168,27 +138,20 @@ public class UsuarioRest extends UtilRest {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
-	
+
 	@GET
 	@Path("/buscarPorLoginAlterar")
 	@Consumes("application/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscarPorLoginAlterar(@Context HttpServletRequest req) {
-
 		try {
 			Usuario usuario = new Usuario();
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCUsuarioDAO jdbcUsuario = new JDBCUsuarioDAO(conexao);
-			
-			
 			HttpSession sessao = req.getSession();
-			
 			String log = (String) sessao.getAttribute("login");
-			
 			usuario = jdbcUsuario.buscarPorLogin(log);
 			conec.fecharConexao();
 			return this.buildResponse(usuario);
@@ -196,17 +159,12 @@ public class UsuarioRest extends UtilRest {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
-	
-	
 
 	@PUT
 	@Path("/alterar")
 	@Consumes("application/*")
 	public Response alterar(String usuarioParam) {
-
 		try {
 			Usuario usuario = new Gson().fromJson(usuarioParam, Usuario.class);
 			Conexao conec = new Conexao();
@@ -219,11 +177,6 @@ public class UsuarioRest extends UtilRest {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
 		}
-
 	}
-	
+
 }
-
-
-
-	
