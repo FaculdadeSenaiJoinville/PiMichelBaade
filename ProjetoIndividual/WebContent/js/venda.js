@@ -32,8 +32,7 @@ $(document).ready(function() {
 			valorAntigo[i] = valorAtual[i].value;
 			
 		}	
-		$("#totalValores").html("Total: R$ "+valorTotalAntigo);
-		
+		$("#totalValores").html("Total: R$ "+SONHOS.formatarDinheiro(valorTotalAntigo));
 	}
 
 

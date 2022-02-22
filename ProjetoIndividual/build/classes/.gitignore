@@ -1,3 +1,5 @@
-/br/
-/LogoutServlet/
 /Filter/
+/LoginServlet/
+/LogoutServlet/
+/RedefinirSenhaServlet/
+/br/

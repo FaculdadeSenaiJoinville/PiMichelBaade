@@ -149,7 +149,7 @@ $(document).ready(function() {
 				"<td>"+listaDeProdutos[i].id+"</td>"+
 				"<td>"+listaDeProdutos[i].catNome+"</td>"+
 				"<td>"+listaDeProdutos[i].nome+"</td>"+
-				"<td>"+listaDeProdutos[i].valor+"</td>"+
+				"<td><a>R$ "+SONHOS.formatarDinheiro(listaDeProdutos[i].valor)+"</a></td>"+
 				"<td>"+listaDeProdutos[i].isvalorunidade+"</td>"+		
 				"<td>"+
 					"<a onclick=\"SONHOS.produto.exibirEdicao('"+listaDeProdutos[i].id+"')\"><img src='/ProjetoIndividual/imgs/edit.png' alt='Editar registro'></a>"+

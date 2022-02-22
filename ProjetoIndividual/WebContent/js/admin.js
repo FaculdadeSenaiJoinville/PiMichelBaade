@@ -42,5 +42,6 @@ $(document).ready(function() {
 });
 
 SONHOS.formatarDinheiro = function(valor){
+	
 	return valor.toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");	
 }
