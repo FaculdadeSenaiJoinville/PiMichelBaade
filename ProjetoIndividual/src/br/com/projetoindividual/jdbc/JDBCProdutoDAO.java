@@ -107,12 +107,24 @@ public class JDBCProdutoDAO implements ProdutoDAO {
 	}
 
 	public String deletar(int id) {
-		String comando = "DELETE FROM produtos WHERE id = ?";
+		String comando = "SELECT produtos_id FROM vendas_has_produtos WHERE produtos_id = " + id;
 		PreparedStatement p;
+		
 		try {
+			
 			p = this.conexao.prepareStatement(comando);
-			p.setInt(1, id);
-			p.execute();
+			ResultSet rs = p.executeQuery(comando);
+			while (rs.next()) {
+				return "Não é possível excluir um produto onde há vendas relacionadas.";
+			}
+			
+			
+			String comando2 = "DELETE FROM produtos WHERE id = ?";
+			PreparedStatement p2;
+			
+			p2 = this.conexao.prepareStatement(comando2);
+			p2.setInt(1, id);
+			p2.execute();
 			return "Produto deletado com sucesso!";
 		} catch (SQLException e) {
 			e.printStackTrace();
