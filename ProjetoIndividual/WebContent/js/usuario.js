@@ -3,42 +3,42 @@ SONHOS.usuario = new Object();
 function validaUsuario(){
 	
 	if(document.frmAddUsuario.nome.value == ""){
-		alert("O campo nome foi preenchido incorretamente!");
+		SONHOS.exibirAviso("O campo nome foi preenchido incorretamente!");
 		return false;
 	}
 	
 	var cpf = document.frmAddUsuario.cpf.value;
 	var expRegCpf = new RegExp("([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})");
 	if(!expRegCpf.test(cpf)){
-		alert("O CPF foi preenchido incorretamente! Por favor preencha sem pontuação, conforme o seguinte exemplo: 09484433363");
+		SONHOS.exibirAviso("O CPF foi preenchido incorretamente! Por favor preencha sem pontuação, conforme o seguinte exemplo: 09484433363");
 		return false;
 	}
 	if(document.frmAddUsuario.datanasc.value == ""){
-		alert("A data de nascimento foi preenchida incorretamente!");
+		SONHOS.exibirAviso("A data de nascimento foi preenchida incorretamente!");
 		return false;
 	}
 	
 	var telefone = document.frmAddUsuario.telefone.value;
 	var expRegTel = new RegExp("([0-9]{3}|[0-9]{2})?([0-9]{2})([0-9]{4,5})([0-9]{4})");
 	if(!expRegTel.test(telefone)){
-		alert("O telefone foi preenchido incorretamente! Por favor preencha sem pontuação, conforme um dos seguintes exemplos: \n 5547996015808 \n 47996015808");
+		SONHOS.exibirAviso("O telefone foi preenchido incorretamente! Por favor preencha sem pontuação, conforme um dos seguintes exemplos: \n 5547996015808 \n 47996015808");
 		return false;
 	}
 	if(document.frmAddUsuario.email.value == ""){
-		alert("O e-mail foi preenchido incorretamente!");
+		SONHOS.exibirAviso("O e-mail foi preenchido incorretamente!");
 		return false;
 	}
 	
 	if(document.frmAddUsuario.login.value == ""){
-		alert("O login foi preenchido incorretamente!");
+		SONHOS.exibirAviso("O login foi preenchido incorretamente!");
 		return false;
 	}
 	if(document.frmAddUsuario.senha.value == ""){
-		alert("A senha foi preenchida incorretamente!");
+		SONHOS.exibirAviso("A senha foi preenchida incorretamente!");
 		return false;
 	}
 	if(document.frmAddUsuario.nivel_usuario.value == ""){
-		alert("O nível de usuário foi preenchido incorretamente!");
+		SONHOS.exibirAviso("O nível de usuário foi preenchido incorretamente!");
 		return false;
 	}
 	
