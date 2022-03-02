@@ -51,6 +51,48 @@ $(document).ready(function() {
 	SONHOS.usuario = function(){};
 
 	
+	SONHOS.usuario.validaUsuarioAlterar = function(){
+		
+		console.log(document.frmEditaUsuario.nome2.value);
+		if (document.frmEditaUsuario.nome2.value == "") {
+	        SONHOS.exibirAviso("O campo nome foi preenchido incorretamente!");
+	       
+	    }
+
+	    var cpf = document.frmEditaUsuario.cpf2.value;
+	    var expRegCpf = new RegExp("([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})");
+	    if (!expRegCpf.test(cpf)) {
+	        SONHOS.exibirAviso("O CPF foi preenchido incorretamente! Por favor preencha sem pontuação, conforme o seguinte exemplo: 09484433363");
+	   
+	    }
+	    if (document.frmEditaUsuario.datanasc2.value == "") {
+	        SONHOS.exibirAviso("A data de nascimento foi preenchida incorretamente!");
+	        return false;
+	    }
+
+	    var telefone = document.frmEditaUsuario.telefone2.value;
+	    var expRegTel = new RegExp("([0-9]{3}|[0-9]{2})?([0-9]{2})([0-9]{4,5})([0-9]{4})");
+	    if (!expRegTel.test(telefone)) {
+	        SONHOS.exibirAviso("O telefone foi preenchido incorretamente! Por favor preencha sem pontuação, conforme um dos seguintes exemplos: \n 5547996015808 \n 47996015808");
+	        return false;
+	    }
+	    if (document.frmEditaUsuario.email2.value == "") {
+	        SONHOS.exibirAviso("O e-mail foi preenchido incorretamente!");
+	        return false;
+	    }
+
+	    if (document.frmEditaUsuario.login2.value == "") {
+	        SONHOS.exibirAviso("O login foi preenchido incorretamente!");
+	        return false;
+	    }
+	    if (document.frmEditaUsuario.nivel_usuario2.value == "") {
+	        SONHOS.exibirAviso("O nível de usuário foi preenchido incorretamente!");
+	        return false;
+	    }
+	    return true;
+	}
+	
+	
 	SONHOS.usuario.cadastrar = function(){
 		
 		var usuario = new Object();
@@ -248,43 +290,9 @@ $(document).ready(function() {
 					buttons:{
 						"Salvar": function(){
 							
-							if(document.frmEditaUsuario.nome2.value == ""){
-								SONHOS.exibirAviso("O campo nome foi preenchido incorretamente!");
-								return false;
-							}
-							
-							var cpf = document.frmEditaUsuario.cpf2.value;
-							var expRegCpf = new RegExp("([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})");
-							if(!expRegCpf.test(cpf)){
-								SONHOS.exibirAviso("O CPF foi preenchido incorretamente! Por favor preencha sem pontuação, conforme o seguinte exemplo: 09484433363");
-								return false;
-							}
-							if(document.frmEditaUsuario.datanasc2.value == ""){
-								SONHOS.exibirAviso("A data de nascimento foi preenchida incorretamente!");
-								return false;
-							}
-							
-							var telefone = document.frmEditaUsuario.telefone2.value;
-							var expRegTel = new RegExp("([0-9]{3}|[0-9]{2})?([0-9]{2})([0-9]{4,5})([0-9]{4})");
-							if(!expRegTel.test(telefone)){
-								SONHOS.exibirAviso("O telefone foi preenchido incorretamente! Por favor preencha sem pontuação, conforme um dos seguintes exemplos: \n 5547996015808 \n 47996015808");
-								return false;
-							}
-							if(document.frmEditaUsuario.email2.value == ""){
-								SONHOS.exibirAviso("O e-mail foi preenchido incorretamente!");
-								return false;
-							}
-							
-							if(document.frmEditaUsuario.login2.value == ""){
-								SONHOS.exibirAviso("O login foi preenchido incorretamente!");
-								return false;
-							}
-							if(document.frmEditaUsuario.nivel_usuario2.value == ""){
-								SONHOS.exibirAviso("O nível de usuário foi preenchido incorretamente!");
-								return false;
-							}
-								
-						SONHOS.usuario.editar();
+						if(!SONHOS.usuario.validaUsuarioAlterar()){
+							SONHOS.usuario.editar();
+						}
 											
 						},
 						"Cancelar": function(){

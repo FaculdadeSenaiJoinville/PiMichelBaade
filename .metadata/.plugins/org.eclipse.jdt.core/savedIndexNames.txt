@@ -74,7 +74,6 @@ INDEX VERSION 1.131+C:\Users\SENAI\Downloads\PiMichelBaade\.metadata\.plugins\or
 282393200.index
 3946058474.index
 1252952132.index
-1773733257.index
 1320796894.index
 1648504810.index
 4042449568.index

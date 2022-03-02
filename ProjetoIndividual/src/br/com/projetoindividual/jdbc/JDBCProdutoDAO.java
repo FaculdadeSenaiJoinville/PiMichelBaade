@@ -39,7 +39,7 @@ public class JDBCProdutoDAO implements ProdutoDAO {
 			p2.setInt(3, produto.getIsValorUnidade());
 			p2.setInt(4, produto.getCategoriaId());
 			p2.execute();
-			return "Produto alterado com sucesso!";
+			return "Produto cadastrado com sucesso!";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return e.getMessage();
