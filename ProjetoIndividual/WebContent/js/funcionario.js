@@ -32,6 +32,8 @@ SONHOS.funcionario = new Object();
 
 $(document).ready(function() {
 
+	
+	
 	SONHOS.funcionario = function(){};
 	
 	SONHOS.funcionario.cadastrar = function(){

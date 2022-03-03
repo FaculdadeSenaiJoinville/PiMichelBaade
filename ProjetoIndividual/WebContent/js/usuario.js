@@ -290,7 +290,7 @@ $(document).ready(function() {
 					buttons:{
 						"Salvar": function(){
 							
-						if(!SONHOS.usuario.validaUsuarioAlterar()){
+						if(SONHOS.usuario.validaUsuarioAlterar()){
 							SONHOS.usuario.editar();
 						}
 											
