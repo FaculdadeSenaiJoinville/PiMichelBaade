@@ -278,6 +278,12 @@ $(document).ready(function() {
 				document.frmEditaUsuario.telefone2.value = usuario.telefone;		
 				
 				
+				function leftPad(value, totalWidth, paddingChar) {
+					  var length = totalWidth - value.toString().length + 1;
+					  document.frmEditaUsuario.cpf2.value = Array(length).join(paddingChar || '0') + value;
+					};
+				leftPad(document.frmEditaUsuario.cpf2.value, 11);
+				
 				if(usuario.cpf == "0"){
 				SONHOS.exibirAviso("O funcionário não foi encontrado no banco de dados. Por favor recarregue a página e tente novamente!");
 				}else{
