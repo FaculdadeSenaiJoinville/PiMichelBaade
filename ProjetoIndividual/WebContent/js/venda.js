@@ -30,10 +30,7 @@ $(document).ready(function() {
 			categoriaAntigo[i] = categoriaAtual[i].value;
 			QuantidadePesoAntigo[i] = QuantidadePesoAtual[i].value;
 			valorAntigo[i] = valorAtual[i].value;
-			console.log("i="+i+" : "+valorAntigo[i]);
 		}	
-		console.log(valorTotalAntigo);
-		//valorTotalAntigo = valorTotalAntigo.replace(".", ",");
 		
 		$("#totalValores").html("Total: R$ "+SONHOS.formatarDinheiro(valorTotalAntigo));
 	}
@@ -301,7 +298,6 @@ SONHOS.venda.AtualizaValor = function() {
 				var quantidades = document.getElementsByName('QuantidadePeso[]');
 				if(quantidades[linhaAlterada].value.indexOf(",") > -1){
 					caracteresubstitui = quantidades[linhaAlterada].value.indexOf();
-					console.log(caracteresubstitui);
 					quantidades[linhaAlterada].value = quantidades[linhaAlterada].value.replace(",", ".");
 				}
 				var valores = document.getElementsByName('valor[]');
