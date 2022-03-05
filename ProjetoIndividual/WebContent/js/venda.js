@@ -16,7 +16,7 @@ $(document).ready(function() {
 	valorAntigo = new Array();
 	valorAntigo[0] = "";
 		
-	var valorTotalAntigo = parseInt(0);
+	var valorTotalAntigo = parseFloat(0);
 	
 	SONHOS.venda.guardaValores = function(id){
 		
@@ -30,8 +30,11 @@ $(document).ready(function() {
 			categoriaAntigo[i] = categoriaAtual[i].value;
 			QuantidadePesoAntigo[i] = QuantidadePesoAtual[i].value;
 			valorAntigo[i] = valorAtual[i].value;
-			
+			console.log("i="+i+" : "+valorAntigo[i]);
 		}	
+		console.log(valorTotalAntigo);
+		//valorTotalAntigo = valorTotalAntigo.replace(".", ",");
+		
 		$("#totalValores").html("Total: R$ "+SONHOS.formatarDinheiro(valorTotalAntigo));
 	}
 
@@ -296,15 +299,20 @@ SONHOS.venda.AtualizaValor = function() {
 				
 				var venda = new Object();
 				var quantidades = document.getElementsByName('QuantidadePeso[]');
+				if(quantidades[linhaAlterada].value.indexOf(",") > -1){
+					caracteresubstitui = quantidades[linhaAlterada].value.indexOf();
+					console.log(caracteresubstitui);
+					quantidades[linhaAlterada].value = quantidades[linhaAlterada].value.replace(",", ".");
+				}
 				var valores = document.getElementsByName('valor[]');
 				var idprodutos = document.getElementsByName('selProduto[]');
 				
 				venda.produtos = new Array(valoresProdutos.length);
 				valores[linhaAlterada].value = (valoresProdutos * quantidades[linhaAlterada].value);
 				
-				valorTotalAntigo = parseInt(0);
-				for (var i = 0; i < valores.length; i++) {					
-					valorTotalAntigo = parseInt(valorTotalAntigo) + parseInt(valores[i].value); 
+				valorTotalAntigo = parseFloat(0);
+				for (var i = 0; i < valores.length; i++) {
+					valorTotalAntigo = parseFloat(valorTotalAntigo) + parseFloat(valores[i].value); 
 				}
 				SONHOS.venda.guardaValores();
 			},
